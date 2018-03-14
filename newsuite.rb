@@ -2,6 +2,7 @@
 # Importamos la libreria de SW-Services y la libreria de JSON para el parseo
 # require 'SW-Services'
 require './lib/SWSDKRuby'
+require './lib/SWToolsRuby'
 require 'json'
 require 'base64'
 require 'nokogiri'
@@ -92,10 +93,5 @@ puts "Validación de LRFC: #{SWvalidate::validatelrfc(URL, valuetoken, LRFC)}"
 puts "Validación de NoCertificado: #{SWvalidate::validatenocertificado(URL, valuetoken, NoCertificado)}"
 
 
-# Generar Cadena Original
-document = Nokogiri::XML( File.open('./resources/basico33.xml'))
-template = Nokogiri::XSLT( File.open('./resources/xslt/cadenaoriginal_3_3.xslt'))
-transformed_document = template.transform(document).to_s.gsub('<?xml version="1.0" encoding="UTF-8"?>' ,'')
-
-puts "Cadena Original:  #{transformed_document}"
-
+cadena_original = SWTools::genera_cadena_original('./resources/basico33.xml')
+puts "Cadena Original:  #{cadena_original}"
