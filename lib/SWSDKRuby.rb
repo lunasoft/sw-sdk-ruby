@@ -1,6 +1,4 @@
 # Libreria SW SDK Ruby
-# 
-# 
 require 'rubygems'
 require 'uri'
 require 'net/http'
@@ -9,8 +7,8 @@ require 'json'
 
 # Clase Autenticacion
 class SWauthentication
-  # Funcion de autenticación, requiere URL, Usuario y Password
-  def authentication(cUri, cUser, cPassword)
+  # Funcion de autenticaci&oacute;n, requiere URL, Usuario y Password
+  def self.authentication(cUri, cUser, cPassword)
    url = URI(cUri+"/security/authenticate")
 
    http = Net::HTTP.new(url.host, url.port)
@@ -25,10 +23,10 @@ class SWauthentication
 
   end 
 end
-# Clase Timbrado/Emisión-Timbrado
+# Clase Timbrado/Emisi&oacute;n-Timbrado
 class SWstamp
-  # Función de timbrado, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
-  def stamp(cURL, cToken, cVersion, cXML, cBase64)
+  # Funci&oacute;n de timbrado, recibe Strings URL, Token, Versi&oacute;n de timbrado, XML y bolean True/False base64
+  def self.stamp(cURL, cToken, cVersion, cXML, cBase64)
 
     if cBase64 == true
       cBase64 = '/b64/' 
@@ -49,8 +47,8 @@ class SWstamp
     response = http.request(request)
     puts response.read_body
   end
-  # Función de timbrado en JSON, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
-  def stampJSON(cUri, cToken, cVersion, cXML, c_base64)
+  # Funci&oacute;n de timbrado en JSON, recibe Strings URL, Token, Versi&oacute;n de timbrado, XML y bolean True/False base64
+  def self.stampjson(cUri, cToken, cVersion, cXML, c_base64)
 
     if c_base64 == true
       c_base64 = '/b64/' 
@@ -71,8 +69,8 @@ class SWstamp
     response = http.request(request)
     return response.read_body
   end
-  # Función de emisión-timbrado, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
-  def issue(cURL, cToken, cVersion, cXML, cBase64)
+  # Función de emisi&oacute;n-timbrado, recibe Strings URL, Token, Versi&oacute;n de timbrado, XML y bolean True/False base64
+  def self.issue(cURL, cToken, cVersion, cXML, cBase64)
 
     if cBase64 == true
       cBase64 = '/b64/' 
@@ -93,8 +91,8 @@ class SWstamp
     response = http.request(request)
     puts response.read_body
   end
-  # Función de emisión-timbrado en JSON, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
-  def issueJSON(cUri, cToken, cVersion, cXML, c_base64)
+  # Función de emisi&oacute;n-timbrado en JSON, recibe Strings URL, Token, Versi&oacute;n de timbrado, XML y bolean True/False base64
+  def self.issuejson(cUri, cToken, cVersion, cXML, c_base64)
 
     if c_base64 == true
       c_base64 = '/b64/' 
@@ -116,10 +114,10 @@ class SWstamp
     return response.read_body
   end
 end
-# Clase Cancelación
+# Clase Cancelaci&oacute;n
 class SWcancelation
-  # Cancelación por UUID, recibe strings URL, Token, RFC Emisor, UUID
-  def cancelByUUID(cURL, cToken, cRFC, cUUID )
+  # Cancelaci&oacute;n por UUID, recibe strings URL, Token, RFC Emisor, UUID
+  def self.cancelbyuuid(cURL, cToken, cRFC, cUUID )
 
     url = URI(cURL+"/cfdi33/cancel/"+cRFC+"/"+cUUID)
 
@@ -132,8 +130,8 @@ class SWcancelation
     response = http.request(request)
     return response.read_body 
   end
-  # Cancelación por CSD recibe strings URL, Token, UUID, RFC Emisor, Password, CSD en base64, Key en base64
-  def cancelByCSD(cURL, cToken, cUUID, cRFC, cPassword, cB64CSD, cB64Key)
+  # Cancelaci&oacute;n por CSD recibe strings URL, Token, UUID, RFC Emisor, Password, CSD en base64, Key en base64
+  def self.cancelbycsd(cURL, cToken, cUUID, cRFC, cPassword, cB64CSD, cB64Key)
 
     url = URI(cURL+"/cfdi33/cancel/pfx")
 
@@ -148,8 +146,8 @@ class SWcancelation
     response = http.request(request)
     return response.read_body
   end
-  # Cancelación por PFX recibe strings URL, Token, UUID, RFC Emisor, Password, PFX en base64
-  def cancelByPFX(cURL, cToken, cUUID, cRFC, cPassword, cB64PFX)
+  # Cancelaci&oacute;n por PFX recibe strings URL, Token, UUID, RFC Emisor, Password, PFX en base64
+  def self.cancelbypfx(cURL, cToken, cUUID, cRFC, cPassword, cB64PFX)
 
     url = URI(cURL+"/cfdi33/cancel/pfx")
 
@@ -164,8 +162,8 @@ class SWcancelation
     response = http.request(request)
     return response.read_body
   end
-  # Cancelación por XML recibe URL, Token, XML de Tipo Cancelación
-  def cancelByXML(cURL, cToken, cXML)
+  # Cancelaci&oacute;n por XML recibe URL, Token, XML de Tipo Cancelación
+  def self.cancelbyxml(cURL, cToken, cXML)
 
     url = URI(cURL+"/cfdi33/cancel/xml")
 
@@ -184,7 +182,7 @@ end
 # Clase Estado de Cuenta
 class SWaccountBalance
   # Estado de Cuenta recibe strins URL, Token
-  def accountBalance(cURL, cToken)
+  def self.accountbalance(cURL, cToken)
 
     url = URI(cURL+"/account/balance")
 
@@ -202,7 +200,7 @@ end
 # Clase para Validaciones
 class SWvalidate
   # Valida XML recibe strings URL, Token y XML
-  def validateXML(cURL, cToken, cXML)
+  def self.validatexml(cURL, cToken, cXML)
 
     url = URI(cURL+"/validate/cfdi33")
 
@@ -218,7 +216,7 @@ class SWvalidate
     return response.read_body
   end
   # Validar LRFC recibe strings URL, Token y LRFC
-  def validateLRFC(cURL, cToken, cLRFC)
+  def self.validatelrfc(cURL, cToken, cLRFC)
 
     url = URI(cURL+"/lrfc/"+cLRFC)
 
@@ -232,7 +230,7 @@ class SWvalidate
     return response.read_body
   end
   # Validar NoCertificado recibe strings URL, Token y NoCertificado
-  def validateNoCertificado(cURL, cToken, cNoCert)
+  def self.validatenocertificado(cURL, cToken, cNoCert)
 
     url = URI(cURL+"/lco/"+cNoCert)
 
