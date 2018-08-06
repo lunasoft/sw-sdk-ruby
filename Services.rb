@@ -1,41 +1,45 @@
 require 'rubygems'
 require_relative 'Authentication/Auth.rb'
+require 'time'
 
 class Services
-	@token = ""
+	@token = "" 
 	@url = ""
 	@user = ""
 	@password = ""
-	@expirationDate = ""
+	@expirationDate = Time.at(0)
+
+	private
+	def self.raiseException(text)
+		raise text
+	end
 
 	private
 	def self.setData(params)
 		if (params.has_key?('url') and not params['url'].nil?)
 			@url = params['url']
 		else 
-			puts "URL debe especificarse"
+			Services::raiseException("URL debe especificarse")
 		end
 
-		if (params.has_key?('token') and not params['token'].nil?)
-			@token = params['token']
-		else if ((not params.has_key?('user') or params['user'].nil?) or (not params.has_key?('password') or params['password'].nil?)) 
-			puts "Datos de autenticación deben especificarse"
-			end
-		end
-
-		if (params.has_key?('user') and not params['user'].nil?)
+		if (params.has_key?('user') and not params['user'].nil?) and (params.has_key?('password') and not params['password'].nil?)
 			@user = params['user']
-		end
-
-		if (params.has_key?('password') and not params['password'].nil?)
 			@password = params['password']
+		else if (params.has_key?('token') and not params['token'].nil?)
+				@token = params['token']
+				@expirationDate = Time.at(999999999)
+			else
+				Services::raiseException("Datos de autenticación deben especificarse")
+			end
 		end
 
 	end
 
 	def self.getToken()
-		if @token.nil? or @token.empty?
-			@token = Auth::authentication()
+		if (@token.nil? or @token.empty?) or (Time.now > @expirationDate)
+			response = Auth::authentication()
+			@token = response.getToken
+			@expirationDate = Time.at(response.getTimeExpire)
 		end
 		return @token
 	end
