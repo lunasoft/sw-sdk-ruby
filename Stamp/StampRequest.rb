@@ -1,27 +1,29 @@
 require 'net/http'
 require 'json'
+require 'securerandom'
 
 class SWstamp
-  # Función de timbrado, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
+
   def self.stamp(cURL, cToken, cVersion, cXML, cBase64 = false)
 
     b64 = ""
     if cBase64 == true
       b64 = '/b64/' 
     end
-    cbody = "------=_Part_11_11939969.1490230712432\r\nContent-Type: text/xml\r\nContent-Transfer-Encoding: binary\r\nContent-Disposition: form-data; name=\"xml\"; filename=\"xml\"\r\n\r\n"+cXML+"\r\n------=_Part_11_11939969.1490230712432--"
+    boundary = SecureRandom.hex
+    cbody = "------"+boundary+"\r\nContent-Type: text/xml\r\nContent-Transfer-Encoding: binary\r\nContent-Disposition: form-data; name=\"xml\"; filename=\"xml\"\r\n\r\n"+cXML+"\r\n------"+boundary+"--"
     url = URI(cURL+"/cfdi33/stamp/"+cVersion+b64)
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Authorization"] = 'bearer '+cToken
-    request["Content-Type"] = 'multipart/form-data; boundary="----=_Part_11_11939969.1490230712432"'
+    request["Content-Type"] = 'multipart/form-data; boundary="----' + boundary + '"'
     request["Cache-Control"] = 'no-cache'
     request["Content-length"] = cbody.length
     request.body = cbody
     response = http.request(request)
     puts response.read_body
   end
-  # Función de timbrado en JSON, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
+
   def self.stampJson(cUri, cToken, cVersion, cXML, c_base64 = false)
 
     b64 = ""
@@ -38,24 +40,25 @@ class SWstamp
     response = http.request(request)
     return response.read_body
   end
-  # Función de emisión-timbrado, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
+
   def self.issue(cURL, cToken, cVersion, cXML, cBase64 = false)
 
     b64 = ""
     if cBase64 == true
       b64 = '/b64/' 
     end
+    boundary = SecureRandom.hex
     url = URI(cURL+"/cfdi33/issue/"+cVersion+b64)
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Authorization"] = 'bearer '+cToken
-    request["Content-Type"] = 'multipart/form-data; boundary="----=_Part_11_11939969.1490230712432"'
+    request["Content-Type"] = 'multipart/form-data; boundary="----'+boundary+'"'
     request["Cache-Control"] = 'no-cache'
-    request.body = "------=_Part_11_11939969.1490230712432\r\nContent-Type: text/xml\r\nContent-Transfer-Encoding: binary\r\nContent-Disposition: form-data; name=\"xml\"; filename=\"xml\"\r\n\r\n"+cXML+"\r\n------=_Part_11_11939969.1490230712432--"
+    request.body = "------=" + boundary + "\r\nContent-Type: text/xml\r\nContent-Transfer-Encoding: binary\r\nContent-Disposition: form-data; name=\"xml\"; filename=\"xml\"\r\n\r\n"+cXML+"\r\n------" + boundary + "--"
     response = http.request(request)
     puts response.read_body
   end
-  # Función de emisión-timbrado en JSON, recibe Strings URL, Token, Versión de timbrado, XML y bolean True/False base64
+
   def self.issueJson(cUri, cToken, cVersion, cXML, cBase64 = false)
 
     b64 = ""

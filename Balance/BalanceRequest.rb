@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 class SWaccountBalance
-  # Estado de Cuenta recibe strins URL, Token
+  
   def self.accountBalance(cURL, cToken)
     url = URI(cURL+"/account/balance")
     http = Net::HTTP.new(url.host, url.port)

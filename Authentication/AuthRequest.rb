@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 class SWauthentication
-  # Funcion de autenticación, requiere URL, Usuario y Password
+  
   def self.authentication(cUri, cUser, cPassword)
     url = URI(cUri+"/security/authenticate")
     http = Net::HTTP.new(url.host, url.port)

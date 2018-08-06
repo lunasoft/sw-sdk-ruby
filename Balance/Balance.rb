@@ -1,4 +1,4 @@
-require_relative '../Services.rb'#Clase Services.rb
+require_relative '../Services.rb'
 require_relative 'BalanceRequest.rb'
 
 class Balance < Services

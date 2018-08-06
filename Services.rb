@@ -2,7 +2,7 @@ require 'rubygems'
 require_relative 'Authentication/Auth.rb'
 
 class Services
-	@token = "" #variables de clase
+	@token = ""
 	@url = ""
 	@user = ""
 	@password = ""
@@ -18,8 +18,7 @@ class Services
 
 		if (params.has_key?('token') and not params['token'].nil?)
 			@token = params['token']
-			#agregar expiration date
-		else if ((not params.has_key?('user') or params['user'].nil?) or (not params.has_key?('password') or params['password'].nil?)) # or (not params.has_key?('token') or params['token'].nil?)
+		else if ((not params.has_key?('user') or params['user'].nil?) or (not params.has_key?('password') or params['password'].nil?)) 
 			puts "Datos de autenticación deben especificarse"
 			end
 		end
@@ -35,7 +34,7 @@ class Services
 	end
 
 	def self.getToken()
-		if @token.nil? or @token.empty?# or dateTime Now > expirationDate
+		if @token.nil? or @token.empty?
 			@token = Auth::authentication()
 		end
 		return @token
@@ -57,4 +56,4 @@ class Services
 		@token = token
 	end
 
-end#services
+end
