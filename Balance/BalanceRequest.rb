@@ -1,8 +1,8 @@
 require 'net/http'
-require 'json'
+require_relative 'BalanceResponse.rb'
 
 class SWaccountBalance
-  
+
   def self.accountBalance(cURL, cToken)
     url = URI(cURL+"/account/balance")
     http = Net::HTTP.new(url.host, url.port)
@@ -11,6 +11,7 @@ class SWaccountBalance
     request["Content-Type"] = 'application/json'
     request["Cache-Control"] = 'no-cache'
     response = http.request(request)
-    return response.read_body
+    respuestaObj = BalanceResponse.new(response)
+    return respuestaObj.validateStatusCode(respuestaObj)
   end
 end

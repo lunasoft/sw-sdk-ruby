@@ -3,42 +3,113 @@ require_relative 'Stamp/Stamp.rb'
 require_relative 'Cancelation/Cancelation.rb'
 require_relative 'Validation/Validate.rb'
 require_relative 'Balance/Balance.rb'
+require_relative 'Issue/Issue.rb'
 
 
 def read_file(file_name)
   file = File.open(file_name, "r")
-  data = file.read
+  data = file.read()
   file.close
   return data
 end
 
-params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789', "token" => 'T2lYQ0t4L0RHVkR4dHZ5Nkk1VHNEakZ3Y0J4Nk9GODZuRyt4cE1wVm5tbXB3YVZxTHdOdHAwVXY2NTdJb1hkREtXTzE3dk9pMmdMdkFDR2xFWFVPUTQyWFhnTUxGYjdKdG8xQTZWVjFrUDNiOTVrRkhiOGk3RHladHdMaEM0cS8rcklzaUhJOGozWjN0K2h6R3gwQzF0c0g5aGNBYUt6N2srR3VoMUw3amtvPQ.T2lYQ0t4L0RHVkR4dHZ5Nkk1VHNEakZ3Y0J4Nk9GODZuRyt4cE1wVm5tbFlVcU92YUJTZWlHU3pER1kySnlXRTF4alNUS0ZWcUlVS0NhelhqaXdnWTRncklVSWVvZlFZMWNyUjVxYUFxMWFxcStUL1IzdGpHRTJqdS9Zakw2UGRiMTFPRlV3a2kyOWI5WUZHWk85ODJtU0M2UlJEUkFTVXhYTDNKZVdhOXIySE1tUVlFdm1jN3kvRStBQlpLRi9NeWJrd0R3clhpYWJrVUMwV0Mwd3FhUXdpUFF5NW5PN3J5cklMb0FETHlxVFRtRW16UW5ZVjAwUjdCa2g0Yk1iTExCeXJkVDRhMGMxOUZ1YWlIUWRRVC8yalFTNUczZXdvWlF0cSt2UW0waFZKY2gyaW5jeElydXN3clNPUDNvU1J2dm9weHBTSlZYNU9aaGsvalpQMUxtcHoyY0pnTnBlZDJPT1RqSTJBNUZDQmFEbDVwdUEzNFZQSGE1NFRmK3hVVmYyaWZyUWtwblp4ZWxFZlBLcjl4YWx5dlBxeG5BTFIwY2hsZ1E3dmRjRmEwWUN3ODdzdHFWcGdhR1FrenU5NXZJZWJKUlU3QkNWczJ5cCtWcVg3Uzc0bWhZc29YMjRIa1RvN2x3ZkFJTEE9.5iIuY5hXLHHxS0Fa1bkCmTo-Xt_uzdRADR-5UB5SgHQ'}
-b64CSD = 'MIIFxTCCA62gAwIBAgIUMjAwMDEwMDAwMDAzMDAwMjI4MTUwDQYJKoZIhvcNAQELBQAwggFmMSAwHgYDVQQDDBdBLkMuIDIgZGUgcHJ1ZWJhcyg0MDk2KTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMuc2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UEBwwJQ295b2Fjw6FuMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxITAfBgkqhkiG9w0BCQIMElJlc3BvbnNhYmxlOiBBQ0RNQTAeFw0xNjEwMjUyMTUyMTFaFw0yMDEwMjUyMTUyMTFaMIGxMRowGAYDVQQDExFDSU5ERU1FWCBTQSBERSBDVjEaMBgGA1UEKRMRQ0lOREVNRVggU0EgREUgQ1YxGjAYBgNVBAoTEUNJTkRFTUVYIFNBIERFIENWMSUwIwYDVQQtExxMQU43MDA4MTczUjUgLyBGVUFCNzcwMTE3QlhBMR4wHAYDVQQFExUgLyBGVUFCNzcwMTE3TURGUk5OMDkxFDASBgNVBAsUC1BydWViYV9DRkRJMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgvvCiCFDFVaYX7xdVRhp/38ULWto/LKDSZy1yrXKpaqFXqERJWF78YHKf3N5GBoXgzwFPuDX+5kvY5wtYNxx/Owu2shNZqFFh6EKsysQMeP5rz6kE1gFYenaPEUP9zj+h0bL3xR5aqoTsqGF24mKBLoiaK44pXBzGzgsxZishVJVM6XbzNJVonEUNbI25DhgWAd86f2aU3BmOH2K1RZx41dtTT56UsszJls4tPFODr/caWuZEuUvLp1M3nj7Dyu88mhD2f+1fA/g7kzcU/1tcpFXF/rIy93APvkU72jwvkrnprzs+SnG81+/F16ahuGsb2EZ88dKHwqxEkwzhMyTbQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAJ/xkL8I+fpilZP+9aO8n93+20XxVomLJjeSL+Ng2ErL2GgatpLuN5JknFBkZAhxVIgMaTS23zzk1RLtRaYvH83lBH5E+M+kEjFGp14Fne1iV2Pm3vL4jeLmzHgY1Kf5HmeVrrp4PU7WQg16VpyHaJ/eonPNiEBUjcyQ1iFfkzJmnSJvDGtfQK2TiEolDJApYv0OWdm4is9Bsfi9j6lI9/T6MNZ+/LM2L/t72Vau4r7m94JDEzaO3A0wHAtQ97fjBfBiO5M8AEISAV7eZidIl3iaJJHkQbBYiiW2gikreUZKPUX0HmlnIqqQcBJhWKRu6Nqk6aZBTETLLpGrvF9OArV1JSsbdw/ZH+P88RAt5em5/gjwwtFlNHyiKG5w+UFpaZOK3gZP0su0sa6dlPeQ9EL4JlFkGqQCgSQ+NOsXqaOavgoP5VLykLwuGnwIUnuhBTVeDbzpgrg9LuF5dYp/zs+Y9ScJqe5VMAagLSYTShNtN8luV7LvxF9pgWwZdcM7lUwqJmUddCiZqdngg3vzTactMToG16gZA4CWnMgbU4E+r541+FNMpgAZNvs2CiW/eApfaaQojsZEAHDsDv4L5n3M1CC7fYjE/d61aSng1LaO6T1mh+dEfPvLzp7zyzz+UgWMhi5Cs4pcXx1eic5r7uxPoBwcCTt3YI1jKVVnV7/w='
-b64Key = 'MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIAgEAAoIBAQACAggAMBQGCCqGSIb3DQMHBAgwggS9AgEAMASCBMh4EHl7aNSCaMDA1VlRoXCZ5UUmqErAbucRBAKNQXH8t1GNfLDIQejtcocS39VvWnpNXjZJeCg65Y2wI36UGn78gvnU0NOmyUkXksPVrkz7hqNtAVojPUtN65l+MVAsIRVD6OLJeKZ2bLx5z78zrx6Tp1zCGT/NpxL+CJSy5iY6TKqbJcK/9198noOvT2p8rKVqUUF3wLRvD6R/b3BC5wCon/exp3BUTZeiWJqGRRgaW4rn49ZbJPVIcDmUO8mojPesFHjJDSnA0nBnWaUvTYXi0srT+dLZOewsBR8d5GdSWh9ZkM29wJbjYHCMsXkObZjaap3YM8fU29zRyZ8KAqaCnBHCfYjbib56m+Lmnk+ScqMkQQ+S/+2pzn2LzauvBI4p/OjQgBDeblo22X7sX9OA9YaqB3q6CCjQ5tkDNrz3HOgTm+amh/kI8TEn9rcKf4Ru7mC1T7VMaFgBqpIS8YJNbcgegF0IF1FpCS05wjdU5CktYAnPnvC+Pj+MFDeH+184kIHBWqPNG6dAzALxRgtKTlGdJ1l5Do+4EWI+0mvKojREnKoDczFnDeCFnM51u3I9Vce3rkf0djRQKFomPVUnPDqxlR5lDAssYAYNcECAkvGxKcBDbjWi/6NHlwjS1r28+0Jhvfxjx9O6hi4AW82Q2/kBE5P/eOwln/jKSbLgi7Iyim1FFHxkQH1FY5kcKhAzFcIq85rGFlzHRfPF9OIQSmONI9kcWQCxkk8aG1u1zwbjZRYLTxlwmZvynOgaWRpTN8Y4ReBDIG1klhva7nqqoM416oXBG71IKaCtjAwRlE6pgaqnIz/WQAb2FR541pqynX6dB6DB1nIWnatsWZJZlu+Bnhf9DBlUsO9ZSAf9Fa9nJAzwFCzaKIsvGJIeKSZ/h+vInkjaO/rxswErVROTfZy1lO2CJ/xnAgzFGrpDxNJPliv3McO9TGwYy/zHhE6Pdo8Xu6NsMisNU6TB8Bc26uLNv/7kWhNmNnBA1qt5akln6hOHrPBXGBiTNUL0IoFVPNdCbS0834zAYXfgtZLDzVpeLqmeMpqXbIYK0/NXe9etxuOcN40O+B/fTHHmO7dMgBZ4vAApVQUPr7ilumVHsWSMRP/0p5R9q4qr1bDm9S5YCPevdyYWTSceGSrXHmjYzJLBtpc/s77mynNqZEYjhnKk2XRNp6kp/FYRu+QdsX9vaDJbLKR2EnSC4fU6UOTO03IZU15j3wOsg30QrXoKntSJ/beF99cvFHuPrQPWxCtws0lLwkkHNVOm6XNO948Moy1w1pL4i68CwmceYZaYrYhmHGdLuescFQrZQaULDWhpK2Stys8Vs/XwwxNi9MHAFSXpdy/b+Aro5n87w+0MHRcllF8ZKbtQ/ym4oG7aREuo7o71JXJQPjZKTOtVM1EQx/FLM/5brnDSoyvLtoYtv9/tTnIC+8gR6eErkzaGmn8pftPhGNuz6yzx8JeLFoMD7VWbGTefj46KS+yMweFJnpReHEqwnukXpEYq19EWVyQa/Sb7navtKt80y/vRs0aNZp3iL23AOs0u1kQ1CFNY2y12Gor1koaH2FUd5jAQnaSKmgarLy0H/QVvR2g8B3+Fh49QhKYrd8N6LvvI80cwbEoqYWn5DWA='
-b64PFX = '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'
+b64CSD = read_file('resources\b64CSD.txt')
+b64Key = read_file('resources\b64Key.txt')
+b64PFX = read_file('resources\b64Pfx.txt')
+xmlCancel = read_file('resources\cancelByXml.xml')
+xml = read_file('resources\xml33.xml')
 passwordcsd = '12345678a'
 noCert = '20001000000300022815'
 uuid = 'f784a223-a73d-429c-aa10-3f64a3d86dee'
 rfc = 'LAN7008173R5'
-xmlCancel= '<Cancelacion Fecha="2013-10-15T19:50:57" RfcEmisor="AAA010101000" xmlns="http://cancelacfd.sat.gob.mx" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> <Folios> <UUID>7362C5D3-3D90-4B46-B0D6-31FB46F57464</UUID> </Folios> <Folios> <UUID>4735E554-EF48-4544-A77E-F3D7284B452B</UUID> </Folios> <Signature xmlns="http://www.w3.org/2000/09/xmldsig#"> <SignedInfo> <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/> <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/> <Reference URI=""> <Transforms> <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/> </Transforms> <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/> <DigestValue>zorfodnMo3SZ1DTK8TW21mwqygM=</DigestValue> </Reference> </SignedInfo> <SignatureValue>Y6OjkpA4eXr4xh0gy7b8JDwlHpDHNEfhAtw6MouagIEIDOD8LkIzMbefpaD1BTCTl7PHT3YfeeS88ki1OzZaHMz0bvL+y6VcfOuG0JQq8i2tXIBQmatJSh3L8/HJwteQnIPsHYkhTnYSAiJS3ZUBV+VV87strs6OppnbEKCBFHE=</SignatureValue> <KeyInfo> <X509Data> <X509IssuerSerial> <X509IssuerName>OID.1.2.840.113549.1.9.2=Responsable: Héctor Ornelas Arciga, OID.2.5.4.45=SAT970701NN3, L=Coyoacán, S=Distrito Federal, C=MX, PostalCode=06300, STREET="Av. Hidalgo 77, Col. Guerrero", E=asisnet@pruebas.sat.gob.mx, OU=Administración de Seguridad de la Información, O=Servicio de Administración Tributaria, CN=A.C. de pruebas</X509IssuerName> <X509SerialNumber>286524172099382162235533054511188021807429465904</X509SerialNumber> </X509IssuerSerial> <X509Certificate>MIIEdDCCA1ygAwIBAgIUMjAwMDEwMDAwMDAxMDAwMDU4NzAwDQYJKoZIhvcNAQEFBQAwggFvMRgwFgYDVQQDDA9BLkMuIGRlIHBydWViYXMxLzAtBgNVBAoMJlNlcnZpY2lvIGRlIEFkbWluaXN0cmFjacOzbiBUcmlidXRhcmlhMTgwNgYDVQQLDC9BZG1pbmlzdHJhY2nDs24gZGUgU2VndXJpZGFkIGRlIGxhIEluZm9ybWFjacOzbjEpMCcGCSqGSIb3DQEJARYaYXNpc25ldEBwcnVlYmFzLnNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxEjAQBgNVBAcMCUNveW9hY8OhbjEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMTIwMAYJKoZIhvcNAQkCDCNSZXNwb25zYWJsZTogSMOpY3RvciBPcm5lbGFzIEFyY2lnYTAeFw0xMjA3MjcxNzAyMDlaFw0xNjA3MjcxNzAyMDlaMIHbMSkwJwYDVQQDEyBBQ0NFTSBTRVJWSUNJT1MgRU1QUkVTQVJJQUxFUyBTQzEpMCcGA1UEKRMgQUNDRU0gU0VSVklDSU9TIEVNUFJFU0FSSUFMRVMgU0MxKTAnBgNVBAoTIEFDQ0VNIFNFUlZJQ0lPUyBFTVBSRVNBUklBTEVTIFNDMSUwIwYDVQQtExxBQUEwMTAxMDFBQUEgLyBIRUdUNzYxMDAzNFMyMR4wHAYDVQQFExUgLyBIRUdUNzYxMDAzTURGUk5OMDkxETAPBgNVBAsTCFVuaWRhZCA0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCxjtFKP9bhgV8I8lIlc58M19l8xBIrM6rWJagt1G/yYTo6WLVKTGx9fiWSnTZVeClcrLXo3heKYAkHPla6WHRiMRkwdshafy9AtUx5xyLIDXzER4K/eZitmzp9LWTxi6BYEHPUuOdFJ8PtPkVb3yvadMJgxMtI47uXxmx40mkA9QIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQUFAAOCAQEA2D99yNxnBdJ7ONJQ7XiMaaqCTkB4wWYxHaFlxpKgLe3HRc86rEZfBnoHLGd/ACAIoTc2PG09J4qkDOw63fb1aNLa9Zjqat+Nh6qB7+ifC9+pAVd6OrR5Ch7v/Fr0I4APrfSyXbx5U915zaGw9c1wM57Lfa0oGipkPUfab2lnf0y6X1WXMKv+vMMVtlQxUAC0Vc5HBPV3aWtDXwg8pANbcYfZEr8H2i4aOpFBsRLuPjdo9OOqfn4Df6GoqKUrlwBPh6wCqexSKuG3XuTqZB1svdyss9NW+iOTqkBFWJrOPpKwVppyt4YGEcejoPBcnWpGSALpahuxuX5hoUak0+1Yxw==</X509Certificate> </X509Data> </KeyInfo> </Signature> </Cancelacion>'
-xml = '<?xml version="1.0" encoding="utf-8"?><cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="RogueOne" Folio="HNFK231" Fecha="2018-07-24T12:00:49" Sello="TElpcJ3zvEMTwm2n4L4tMHdW5bKXFZSkBkPufY8tobhNQXkEa4rIKrQ5ZVAOTOKxHHF24F91WYJSLU7a+AjrmPRnuVFIV0637aOOt27G6YY5VpZflBNNRhDuHaQF3EOOo5J4XSATdqfFxeUA0HbPfY0BOk6VNEbdGV4Bn1vSrsqLp0ztINwvgXSO/oDOK05ZJt63x2zVp3wjjfx2iWvGaSHbSp9kibex1SPnw5plhnlo6dF0fRBSlhEXKYnUgVWWe1KL9TyPe7mpr8Kkb4kelK9dB9tsdV8Y8IRv1iOsb8WQq8/D5iRJPxY4urcxV5sqCCgDXx6sA8AY2uwAAcSwAg==" FormaPago="01" NoCertificado="20001000000300022816" Certificado="MIIF0TCCA7mgAwIBAgIUMjAwMDEwMDAwMDAzMDAwMjI4MTYwDQYJKoZIhvcNAQELBQAwggFmMSAwHgYDVQQDDBdBLkMuIDIgZGUgcHJ1ZWJhcyg0MDk2KTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSkwJwYJKoZIhvcNAQkBFhphc2lzbmV0QHBydWViYXMuc2F0LmdvYi5teDEmMCQGA1UECQwdQXYuIEhpZGFsZ28gNzcsIENvbC4gR3VlcnJlcm8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQRGlzdHJpdG8gRmVkZXJhbDESMBAGA1UEBwwJQ295b2Fjw6FuMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxITAfBgkqhkiG9w0BCQIMElJlc3BvbnNhYmxlOiBBQ0RNQTAeFw0xNjEwMjUyMTU0MTlaFw0yMDEwMjUyMTU0MTlaMIG9MR4wHAYDVQQDExVNQiBJREVBUyBESUdJVEFMRVMgU0MxHjAcBgNVBCkTFU1CIElERUFTIERJR0lUQUxFUyBTQzEeMBwGA1UEChMVTUIgSURFQVMgRElHSVRBTEVTIFNDMSUwIwYDVQQtExxMQU44NTA3MjY4SUEgLyBGVUFCNzcwMTE3QlhBMR4wHAYDVQQFExUgLyBGVUFCNzcwMTE3TURGUk5OMDkxFDASBgNVBAsUC1BydWViYV9DRkRJMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjHr4KeoEx3BdkQP93AuN4fKo0rCZQsd9RJGBzQFvhmPJjGaVP81OUORM+lCRllxZxATZCAIFPOT3jl5wYgtolGYWWrt1HoAiuja1LKDGKrYgph0qWYKYeuew10fTyV+AeSbx1jTKz1PAAak06hx4M0rvmdiGO/Kg00/0wKz5/L3ZIMXEj+Hgr0IGh/yUIy8m5aKf+9jwuNttm/xDoeW3A8pxuidPU1Z1vliaZs75n89hC9LNwshhoaF3AvXIsgLDeuh9WoMGSm0HrilP9umFnm3nGUESiJa15Ep7LbG4CIhZrrknSm4fyrPk9KAigqLYMJhRsRwfp2qncAnAA+FuSQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAd7t48tgawC9aczrGYt+4GFRcjj1LVKV3NElG+VH2s51KPkKPLj2Sw6OiEOGd+49spxHj1VR5MFvJo/pEJLY3EuLTifC9YZZYC8pHNDiA/eSvKqW5JNzp5/rgs3qAG1GrfdNGuSD3FkqhDdB6tJYqzTc12IC7xEAhKXrWZYCqa+zb9ogtzrUVL3vRRLMpnGEHK2yx8dhvG35qjHEfXyuoBsWILrVmnPpDCFO/CCLQB1OuMti1mlir6voBN0L1EbFK30w2bEuVihAeVLX8vVfMq4ZPI7UTLnblGnN11CCqiZkWhhehYrMdCjb5thMkEA+CMlIaFJYp7pNkLxQd4Y5+r8pTrdxxyvpA51DIWdoxvwaOiz1bzZk6ElVY2rfxwyZaJ17cJ1jmS4Yb5P4h8+5zkmZnPmRqfmaVO3nsApLWP6A38ZBrwwss429PJMSpfeXKGysPsqwF0yP3blsM7Cw53393LSHGKNm2GgG0kcrHnbbku6z6fjBdXMQQ5vjPuMNyw/pe3PzQLVoNOrD5AOoZmSG2TI3DtY4edLdiGmNQjo3MmAMMq4s7lr4AELPWAZRbnOlD1nEWGLdRp1mViteDvXwBL9E98EB4K9xK21DvgJ6rzw/D9rX6epeANfoXazWC0iCYcBNXiPikApcW73a/Jl/WjkEwEdkL/jLj0KCep58=" SubTotal="200.00" Moneda="MXN" TipoCambio="1" Total="603.20" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="06300" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><cfdi:Emisor Rfc="LAN8507268IA" Nombre="MB IDEAS DIGITALES SC" RegimenFiscal="601" /><cfdi:Receptor Rfc="AAA010101AAA" Nombre="SW SMARTERWEB" UsoCFDI="G03" /><cfdi:Conceptos><cfdi:Concepto ClaveProdServ="50211503" NoIdentificacion="UT421511" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="Cigarros" ValorUnitario="200.00" Importe="200.00"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="200.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.00" /><cfdi:Traslado Base="232.00" Impuesto="003" TipoFactor="Tasa" TasaOCuota="1.600000" Importe="371.20" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto></cfdi:Conceptos><cfdi:Impuestos TotalImpuestosTrasladados="403.20"><cfdi:Traslados><cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.00" /><cfdi:Traslado Impuesto="003" TipoFactor="Tasa" TasaOCuota="1.600000" Importe="371.20" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Comprobante>'
+
+
+
+
+params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+resultSpect = "success"
+
 
 Auth::set(params)
-p Auth::authentication()
+resultAuth = Auth::authentication()
+if resultSpect != resultAuth.getStatus()
+	Services::raiseException("Auth Fail")
+else
+	puts "Auth -> ok"
+end
+
 
 Stamp::set(params)
-Stamp::stampV4(xml)
+resultStamp = Stamp::stampV4(xml)
+if (resultSpect == resultStamp.getStatus()) || (resultStamp.getMessage() =~ /^307/)
+	puts "Stamp -> ok"
+else
+	Services::raiseException("Stamp Fail")
+end
+
+
+Issue::set(params)
+resultIssue = Issue::issueV4(xml)
+if (resultSpect == resultIssue.getStatus()) || (resultIssue.getMessage() =~ /^307/)
+	puts "Issue -> ok"
+else
+	Services::raiseException("Issue Fail")
+end
+
 
 Cancelation::set(params)
-p Cancelation::cancelCsd(uuid, rfc, passwordcsd, b64CSD, b64Key)
-p Cancelation::cancelUuid(rfc, uuid)
-p Cancelation::cancelPfx(uuid, rfc, passwordcsd, b64PFX)
-p Cancelation::cancelXml(xmlCancel)
+resultCancelCSD = Cancelation::cancelCsd(uuid, rfc, passwordcsd, b64CSD, b64Key)
+if resultSpect != resultCancelCSD.getStatus()
+	Services::raiseException("CancelCSD Fail")
+else
+	puts "CancelCSD -> ok"
+end
+resultCancelUUID = Cancelation::cancelUuid(uñuid, rfc)
+if resultSpect != resultCancelUUID.getStatus()
+	Services::raiseException("CancelUUID Fail")
+else
+	puts "CancelUUID -> ok"
+end
+resultCancelPFX = Cancelation::cancelPfx(uuid, rfc, passwordcsd, b64PFX)
+if resultSpect != resultCancelPFX.getStatus()
+	Services::raiseException("CancelPFX Fail")
+else
+	puts "CancelPFX -> ok"
+end
+resultCancelXML = Cancelation::cancelXml(xmlCancel)
+if resultSpect != resultCancelXML.getStatus()
+	Services::raiseException("CancelXML Fail")
+else
+	puts "CancelXML -> ok"
+end
+
 
 Balance::set(params)
-p Balance::getAccountBalance()
+resultBalance = Balance::getAccountBalance()
+if resultSpect != resultBalance.getStatus()
+	Services::raiseException("Balance Fail")
+else
+	puts "Balance -> ok"
+end
+
 
 Validate::set(params)
-p Validate::validateXml(xml)
-p Validate::validateLrfc(rfc)
-p Validate::validateNoCert(noCert)
+resultValidateXML = Validate::validateXml(xml)
+if resultSpect != resultValidateXML.getStatus()
+	Services::raiseException("ValidateXml Fail")
+else
+	puts "ValidateXml -> ok"
+end
+resultValidateLrfc = Validate::validateLrfc(rfc)
+if resultSpect != resultValidateLrfc.getStatus()
+	Services::raiseException("ValidateLrfc Fail")
+else
+	puts "ValidateLrfc -> ok"
+end
+resultValidateNoCert = Validate::validateNoCert(noCert)
+if resultSpect != resultValidateNoCert.getStatus()
+	Services::raiseException("ValidateNoCert Fail")
+else
+	puts "ValidateNoCert -> ok"
+end
+

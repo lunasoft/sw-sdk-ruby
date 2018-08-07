@@ -1,8 +1,8 @@
 require 'net/http'
-require 'json'
+require_relative 'AuthResponse.rb'
 
 class SWauthentication
-  
+
   def self.authentication(cUri, cUser, cPassword)
     url = URI(cUri+"/security/authenticate")
     http = Net::HTTP.new(url.host, url.port)
@@ -11,12 +11,7 @@ class SWauthentication
     request["password"] = cPassword
     request["Cache-Control"] = 'no-cache'
     response = http.request(request)
-    responseBody = JSON.parse(response.read_body)
-    if(responseBody['status'] == 'success')
-      Services::setToken(responseBody['data']['token'])
-        return responseBody['data']['token']
-    else
-        return responseBody
-    end
+    respuestaObj = AuthResponse.new(response)
+    return respuestaObj.validateStatusCode(respuestaObj)
   end 
 end

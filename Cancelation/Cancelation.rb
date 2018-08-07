@@ -10,8 +10,8 @@ class Cancelation < Services
 		return SWcancelation::cancelbycsd(Services::getUrl(), Services::getToken(), cUUID, cRFC, cPasswordCSD, cB64CSD, cB64Key)
 	end
 
-	def self.cancelUuid(cRFC, cUUID)
-		return SWcancelation::cancelbyuuid(Services::getUrl, Services::getToken(), cRFC, cUUID)
+	def self.cancelUuid(cUUID, cRFC)
+		return SWcancelation::cancelbyuuid(Services::getUrl, Services::getToken(), cUUID, cRFC)
 	end
 
 	def self.cancelPfx(cUUID, cRFC, cPassword, cB64PFX)
