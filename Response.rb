@@ -5,6 +5,7 @@ class Response
 	@messageDetail = nil
 	@data = nil
 	@statusCode = nil
+	@response = nil
 
 	def getStatus()
 		return @status
@@ -20,6 +21,9 @@ class Response
 	end
 	def getStatusCode()
 		return @statusCode
+	end
+	def getResponse()
+		return @response
 	end
 
 	def validateStatusCode(response)
