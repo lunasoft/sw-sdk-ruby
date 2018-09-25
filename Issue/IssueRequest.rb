@@ -28,13 +28,13 @@ class SWissue
     if cBase64 == true
       b64 = '/b64/' 
     end
-    url = URI(cUri+"/cfdi33/issue/json/"+cVersion+b64)
+    url = URI(cUri+"/v3/cfdi33/issue/json/"+cVersion+b64)
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Authorization"] = 'bearer '+ cToken
-    request["Content-Type"] = 'application/json'
+    request["Content-Type"] = 'application/jsontoxml'
     request["Cache-Control"] = 'no-cache'
-    request.body = '{ "data": "'+cXML+'"}'
+    request.body = cXML
     response = http.request(request)
     respuestaObj = IssueResponse.new(response)
     return respuestaObj.validateStatusCode(respuestaObj)

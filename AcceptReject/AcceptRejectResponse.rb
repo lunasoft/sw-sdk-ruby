@@ -2,21 +2,22 @@ require_relative '../Response.rb'
 require 'net/http'
 require 'json'
 
-class BalanceResponse < Response
+class AcceptRejectResponse < Response
 	def initialize(cResponse)
 		set(cResponse)
-	end
-
+    end
+    def getAcuse()
+       return @acuse 
+    end
 	def set(cResponse)
+		@statusCode = cResponse.code
 		begin
-			@statusCode = cResponse.code
 			@response = JSON.parse(cResponse.read_body)
-			@data = @response['data']
 			@status = @response['status']
-		rescue
-			@message = @response['message']
+			@data = @response['data']
+        rescue
+            @message = @response['message']
 			@messageDetail = @response['messageDetail']
 		end
 	end
-
 end

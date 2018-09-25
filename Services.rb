@@ -1,5 +1,4 @@
 require 'rubygems'
-require_relative 'Authentication/Auth.rb'
 require 'time'
 
 class Services
