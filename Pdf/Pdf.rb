@@ -7,6 +7,6 @@ class Pdf < Services
 	end
 
 	def self.generatePDF(cXml, cTemplateId = nil, cExtras = nil)
-		return SWpendings::pendings(Services::getUrl(), Services::getToken(), cRFC)
+		return SWPdf::pdf(Services::getUrl(), Services::getToken(), cRFC)
 	end
 end
