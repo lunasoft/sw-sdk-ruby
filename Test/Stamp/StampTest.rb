@@ -1,5 +1,5 @@
-require_relative '../../Stamp/Stamp.rb'
-require_relative '../../Authentication/Auth.rb'
+require_relative '../../lib/Stamp/Stamp.rb'
+require_relative '../../lib/Authentication/Auth.rb'
 require 'test/unit'
 
 def read_file(file_name)
@@ -11,7 +11,7 @@ end
 
 class StampTest < Test::Unit::TestCase 
     def test_stampv1
-        xml = read_file('..\..\resources\xml33.xml')
+        xml = read_file('resources\xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         resultStamp = Stamp::stampV1(xml)
@@ -19,7 +19,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stampv2
-        xml = read_file('..\..\resources\xml33.xml')
+        xml = read_file('resources\xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         resultStamp = Stamp::stampV2(xml)
@@ -27,7 +27,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stampv3
-        xml = read_file('..\..\resources\xml33.xml')
+        xml = read_file('resources\xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         resultStamp = Stamp::stampV3(xml)
@@ -35,7 +35,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stampv4
-        xml = read_file('..\..\resources\xml33.xml')
+        xml = read_file('resources\xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         resultStamp = Stamp::stampV4(xml)
