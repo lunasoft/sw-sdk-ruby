@@ -9,7 +9,6 @@ Gem::Specification.new do |s|
   s.email       = ['juan.gamez@sw.com.mx','dev@sw.com.mx']
   s.homepage    = 'https://sw.com.mx/'
   s.metadata    = { "source_code_uri" => "https://github.com/lunasoft/sw-sdk-ruby"}
-  s.extra_rdoc_files = ['README.MD']
   s.files = Dir['lib/*.rb'] + Dir['bin/*']
   s.files += Dir['[A-Z]*'] + Dir['test/**/*']
   s.require_paths = ["lib"]
