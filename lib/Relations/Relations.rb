@@ -1,24 +1,24 @@
 require_relative '../Services.rb'
-require_relative 'RelationsRequest.rb'
+require_relative 'relations_request.rb'
 
 class Relations < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.RelationsCsd(cUUID, cRFC, cPasswordCSD, cB64CSD, cB64Key)
-		return SWrelations::relationsbycsd(Services::getUrl(), Services::getToken(), cUUID, cRFC, cPasswordCSD, cB64CSD, cB64Key)
+	def self.relations_csd(uuid, rfc, password, csd, key)
+		return SwRelations::relations_csd(Services::get_url, Services::get_token, uuid, rfc, password, csd, key)
 	end
 
-	def self.RelationsUuid(cUUID, cRFC)
-		return SWrelations::relationsbyuuid(Services::getUrl, Services::getToken(), cUUID, cRFC)
+	def self.relations_uuid(uuid, rfc)
+		return SwRelations::relations_uuid(Services::get_url, Services::get_token, uuid, rfc)
 	end
 
-	def self.RelationsPfx(cUUID, cRFC, cPassword, cB64PFX)
-		return SWrelations::relationsbypfx(Services::getUrl(), Services::getToken(), cUUID, cRFC, cPassword, cB64PFX)
+	def self.relations_pfx(uuid, rfc, password, pfx)
+		return SwRelations::relations_pfx(Services::get_url, Services::get_token, uuid, rfc, password, pfx)
 	end
 
-	def self.RelationsXml(cXML)
-		return SWrelations::relationsbyxml(Services::getUrl(), Services::getToken(), cXML)
+	def self.relations_xml(xml)
+		return SwRelations::relations_xml(Services::get_url, Services::get_token, xml)
 	end
 end

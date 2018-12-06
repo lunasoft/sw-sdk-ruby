@@ -1,34 +1,21 @@
 require_relative '../Services.rb'
-require_relative 'StampRequest.rb'
+require_relative 'stamp_request.rb'
 
 class Stamp < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.stampV1(xml, b64 = false)
-		SWstamp::stamp(Services::getUrl(), Services::getToken(), 'v1', xml, b64)
+	def self.stamp_v1(xml, b64 = false)
+		SwStamp::stamp(Services::get_url, Services::get_token, 'v1', xml, b64)
 	end
-	def self.stampV2(xml, b64 = false)
-		SWstamp::stamp(Services::getUrl(), Services::getToken(), 'v2', xml, b64)
+	def self.stamp_v2(xml, b64 = false)
+		SwStamp::stamp(Services::get_url, Services::get_token, 'v2', xml, b64)
 	end
-	def self.stampV3(xml, b64 = false)
-		SWstamp::stamp(Services::getUrl(), Services::getToken(), 'v3', xml, b64)
+	def self.stamp_v3(xml, b64 = false)
+		SwStamp::stamp(Services::get_url, Services::get_token, 'v3', xml, b64)
 	end
-	def self.stampV4(xml, b64 = false)
-		SWstamp::stamp(Services::getUrl(), Services::getToken(), 'v4', xml, b64)
+	def self.stamp_v4(xml, b64 = false)
+		SwStamp::stamp(Services::get_url, Services::get_token, 'v4', xml, b64)
 	end
-	def self.stampJsonV1(xml, b64 = false)
-		SWstamp::stampJson(Services::getUrl(), Services::getToken(), 'v1', xml, b64)
-	end
-	def self.stampJsonV2(xml, b64 = false)
-		SWstamp::stampJson(Services::getUrl(), Services::getToken(), 'v2', xml, b64)
-	end
-	def self.stampJsonV3(xml, b64 = false)
-		SWstamp::stampJson(Services::getUrl(), Services::getToken(), 'v3', xml, b64)
-	end
-	def self.stampJsonV4(xml, b64 = false)
-		SWstamp::stampJson(Services::getUrl(), Services::getToken(), 'v4', xml, b64)
-	end
-
 end

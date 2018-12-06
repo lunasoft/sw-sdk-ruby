@@ -1,12 +1,12 @@
 require_relative '../Services.rb'
-require_relative 'PendingsRequest.rb'
+require_relative 'pendings_request.rb'
 
 class Pendings < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.getPendings(cRFC)
-		return SWpendings::pendings(Services::getUrl(), Services::getToken(), cRFC)
+	def self.get_pendings(rfc)
+		return SwPendings::pendings(Services::get_url, Services::get_token, rfc)
 	end
 end

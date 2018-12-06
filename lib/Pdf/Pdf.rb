@@ -1,12 +1,12 @@
 require_relative '../Services.rb'
-require_relative 'PdfRequest.rb'
+require_relative 'pdf_request.rb'
 
 class Pdf < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.generatePDF(cXml, cTemplateId = nil, cExtras = nil)
-		return SWPdf::pdf(Services::getUrl(), Services::getToken(), cRFC)
+	def self.generate_pdf(xml, template_id = nil, extras = nil)
+		return SWPdf::pdf(Services::get_url, Services::get_token, xml)
 	end
 end

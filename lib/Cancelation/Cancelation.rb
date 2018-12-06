@@ -1,24 +1,24 @@
 require_relative '../Services.rb'
-require_relative 'CancelationRequest.rb'
+require_relative 'cancelation_request.rb'
 
 class Cancelation < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.cancelCsd(cUUID, cRFC, cPasswordCSD, cB64CSD, cB64Key)
-		return SWcancelation::cancelbycsd(Services::getUrl(), Services::getToken(), cUUID, cRFC, cPasswordCSD, cB64CSD, cB64Key)
+	def self.cancel_csd(uuid, rfc, password, csd, key)
+		return SwCancelation::cancel_csd(Services::get_url, Services::get_token, uuid, rfc, password, csd, key)
 	end
 
-	def self.cancelUuid(cUUID, cRFC)
-		return SWcancelation::cancelbyuuid(Services::getUrl, Services::getToken(), cUUID, cRFC)
+	def self.cancel_uuid(uuid, rfc)
+		return SwCancelation::cancel_uuid(Services::get_url, Services::get_token, uuid, rfc)
 	end
 
-	def self.cancelPfx(cUUID, cRFC, cPassword, cB64PFX)
-		return SWcancelation::cancelbypfx(Services::getUrl(), Services::getToken(), cUUID, cRFC, cPassword, cB64PFX)
+	def self.cancel_pfx(uuid, rfc, password, pfx)
+		return SwCancelation::cancel_pfx(Services::get_url, Services::get_token, uuid, rfc, password, pfx)
 	end
 
-	def self.cancelXml(cXML)
-		return SWcancelation::cancelbyxml(Services::getUrl(), Services::getToken(), cXML)
+	def self.cancel_xml(xml)
+		return SwCancelation::cancel_xml(Services::get_url, Services::get_token, xml)
 	end
 end

@@ -1,20 +1,20 @@
 require_relative '../Services.rb'
-require_relative 'ValidateRequest.rb'
+require_relative 'validate_request.rb'
 
 class Validate < Services
 	def self.set(params)
-		Services::setData(params)
+		Services::set_data(params)
 	end
 
-	def self.validateXml(cXML)
-		SWvalidate::validatexml(Services::getUrl(), Services::getToken(), cXML)
+	def self.validate_xml(xml)
+		SwValidate::validate_xml(Services::get_url, Services::get_token, xml)
 	end
 
-	def self.validateLrfc(cRFC)
-		SWvalidate::validatelrfc(Services::getUrl(), Services::getToken(), cRFC)
+	def self.validate_LRFC(rfc)
+		SwValidate::validate_LRFC(Services::get_url, Services::get_token, rfc)
 	end
 
-	def self.validateNoCert(cNoCert)
-		SWvalidate::validatenocertificado(Services::getUrl(), Services::getToken(), cNoCert)
+	def self.validate_LCO(numero_certificado)
+		SwValidate::validate_LCO(Services::get_url, Services::get_token, numero_certificado)
 	end
 end

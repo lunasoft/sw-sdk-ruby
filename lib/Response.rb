@@ -4,44 +4,43 @@ class Response
 	@message = nil
 	@messageDetail = nil
 	@data = nil
-	@statusCode = nil
+	@status_code = nil
 	@response = nil
 
-	def getStatus()
+	def get_status
 		return @status
 	end
-	def getMessage()
+	def get_message
 		return @message
 	end
-	def getMessageDetail()
+	def get_messageDetail
 		return @messageDetail
 	end
-	def getData()
+	def get_data
 		return @data
 	end
-	def getStatusCode()
-		return @statusCode
+	def get_status_code
+		return @status_code
 	end
-	def getResponse()
+	def get_response
 		return @response
 	end
 
-	def validateStatusCode(response)
-		if(response.getStatus == 'success')
+	def validate_status_code(response)
+		if(response.get_status == 'success')
 			return response
 		else
-			case response.getStatusCode.to_i
+			case response.get_status_code.to_i
 			when 300..399
-				Services::raiseException("\nmessage: #{response.getMessage}\nmessageDetail: #{response.getMessageDetail}\nstatus: #{response.getStatus}\nstatusCode: #{response.getStatusCode} Redireccion")
+				Services::raise_exception("\nmessage: #{response.get_message}\nmessageDetail: #{response.get_messageDetail}\nstatus: #{response.get_status}\nstatusCode: #{response.get_status_code} Redireccion")
 			when 400..499
-				if response.getMessage =~ /^307/
+				if response.get_message =~ /^307/
 					return response
 				end
-				Services::raiseException("\nmessage: #{response.getMessage}\nmessageDetail: #{response.getMessageDetail}\nstatus: #{response.getStatus}\nstatusCode: #{response.getStatusCode} Error del cliente")
+				Services::raise_exception("\nmessage: #{response.get_message}\nmessageDetail: #{response.get_messageDetail}\nstatus: #{response.get_status}\nstatusCode: #{response.get_status_code} Error del cliente")
 			when 500..599
-				Services::raiseException("\nmessage: #{response.getMessage}\nmessageDetail: #{response.getMessageDetail}\nstatus: #{response.getStatus}\nstatusCode: #{response.getStatusCode} Error del servidor")
+				Services::raise_exception("\nmessage: #{response.get_message}\nmessageDetail: #{response.get_messageDetail}\nstatus: #{response.get_status}\nstatusCode: #{response.get_status_code} Error del servidor")
 			end
 		end
-
 	end
 end
