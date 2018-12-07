@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://sw.com.mx/'
   s.metadata    = { "source_code_uri" => "https://github.com/lunasoft/sw-sdk-ruby"}
   s.required_ruby_version = '>= 2.1'
-  s.files = Dir['lib/*.rb'] + Dir['bin/*']
+  s.files = Dir['lib/**/*'] + Dir['bin/*']
   s.files += Dir['[A-Z]*'] + Dir['test/**/*']
   s.require_paths = ["lib"]
 end
