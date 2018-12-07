@@ -6,7 +6,7 @@ require_relative '../Response/generic_response.rb'
 class SwAcceptReject
 
   def self.accept_reject_uuid(url, token, uuid, rfc, action)
-    url = URI(url + "/acceptreject/"+rfc+"/"+uuid+"/"+action)
+    url = URI(url + "/acceptreject/" + rfc + "/" + uuid + "/" + action)
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Authorization"] = 'bearer ' + token

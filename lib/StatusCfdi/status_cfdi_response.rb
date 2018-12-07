@@ -45,22 +45,22 @@ class StatusCfdiResponse
         return string2[0]
     end
     public
-    def get_status_code()
+    def get_status_code
         return @status_code
     end
-    def get_response()
+    def get_response
         return @response
     end
-    def get_codigoEstatus()
+    def get_codigoEstatus
         return @codigo_estatus
     end
-    def get_esCancelable()
+    def get_esCancelable
         return @es_cancelable
     end
-    def get_estado()
+    def get_estado
         return @estado
     end
-    def get_estatusCancelacion()
+    def get_estatusCancelacion
         return @estatus_cancelacion
     end
 end

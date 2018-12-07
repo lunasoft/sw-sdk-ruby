@@ -22,7 +22,9 @@ class GenericResponse < Response
 			else
 				response.value
 			end
-		rescue
+		rescue => exception
+			@status = 'error'
+			@message = exception.backtrace
 		end
 	end
 end

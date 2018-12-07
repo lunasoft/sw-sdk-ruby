@@ -29,7 +29,8 @@ class AuthResponse < Response
 				response.value
 			end
 		rescue => exception
-			p exception
+			@status = 'error'
+			@message = exception.backtrace
 		end
 	end
 
