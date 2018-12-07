@@ -11,7 +11,7 @@ end
 
 class StampTest < Test::Unit::TestCase 
     def test_stamp_v1
-        xml = read_file('../../resources/xml33.xml')
+        xml = read_file('resources/xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         response = Stamp::stamp_v1(xml)
@@ -19,7 +19,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stamp_v2
-        xml = read_file('../../resources/xml33.xml')
+        xml = read_file('resources/xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         response = Stamp::stamp_v2(xml)
@@ -27,7 +27,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stamp_v3
-        xml = read_file('../../resources/xml33.xml')
+        xml = read_file('resources/xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         response = Stamp::stamp_v3(xml)
@@ -35,7 +35,7 @@ class StampTest < Test::Unit::TestCase
     end
 
     def test_stamp_v4
-        xml = read_file('../../resources/xml33.xml')
+        xml = read_file('resources/xml33.xml')
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         Stamp::set(params)
         response = Stamp::stamp_v4(xml)
