@@ -1,5 +1,5 @@
-require_relative '../../lib/Stamp/stamp.rb'
-require_relative '../../lib/Authentication/auth.rb'
+require_relative '../../lib/Stamp/Stamp.rb'
+require_relative '../../lib/Authentication/Auth.rb'
 require 'test/unit'
 
 def read_file(file_name)

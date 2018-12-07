@@ -1,5 +1,5 @@
-require_relative '../../lib/Authentication/auth.rb'
-require_relative '../../lib/Issue/issue.rb'
+require_relative '../../lib/Authentication/Auth.rb'
+require_relative '../../lib/Issue/Issue.rb'
 require 'test/unit'
 require 'json'
 
