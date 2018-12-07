@@ -15,7 +15,8 @@ class IssueTest < Test::Unit::TestCase
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         json = read_file("resources/cfdi.json")
         json_hash = JSON.parse(json)
-        json_hash['Fecha'] = Time.now.strftime('%FT%T')
+        fecha = Time.at(Time.now.to_i - 86400)
+        json_hash['Fecha'] = fecha.strftime('%FT%T')
         Issue::set(params)
         result_issue = Issue::issue_JSON_v1(json_hash.to_json)
         assert(result_issue.get_status == "success" || result_issue.get_message =~ /^307/, "Expected \"success\" but was #{result_issue.get_status}")
@@ -24,7 +25,8 @@ class IssueTest < Test::Unit::TestCase
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         json = read_file("resources/cfdi.json")
         json_hash = JSON.parse(json)
-        json_hash['Fecha'] = Time.now.strftime('%FT%T')
+        fecha = Time.at(Time.now.to_i - 86400)
+        json_hash['Fecha'] = fecha.strftime('%FT%T')
         Issue::set(params)
         result_issue = Issue::issue_JSON_v2(json_hash.to_json)
         assert(result_issue.get_status == "success" || result_issue.get_message =~ /^307/, "Expected \"success\" but was #{result_issue.get_status}")
@@ -33,7 +35,8 @@ class IssueTest < Test::Unit::TestCase
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         json = read_file("resources/cfdi.json")
         json_hash = JSON.parse(json)
-        json_hash['Fecha'] = Time.now.strftime('%FT%T')
+        fecha = Time.at(Time.now.to_i - 86400)
+        json_hash['Fecha'] = fecha.strftime('%FT%T')
         Issue::set(params)
         result_issue = Issue::issue_JSON_v3(json_hash.to_json)
         assert(result_issue.get_status == "success" || result_issue.get_message =~ /^307/, "Expected \"success\" but was #{result_issue.get_status}")
@@ -42,7 +45,8 @@ class IssueTest < Test::Unit::TestCase
         params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
         json = read_file("resources/cfdi.json")
         json_hash = JSON.parse(json)
-        json_hash['Fecha'] = Time.now.strftime('%FT%T')
+        fecha = Time.at(Time.now.to_i - 86400)
+        json_hash['Fecha'] = fecha.strftime('%FT%T')
         Issue::set(params)
         result_issue = Issue::issue_JSON_v4(json_hash.to_json)
         assert(result_issue.get_status == "success" || result_issue.get_message =~ /^307/, "Expected \"success\" but was #{result_issue.get_status}")
