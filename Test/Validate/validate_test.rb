@@ -1,4 +1,3 @@
-require_relative '../../lib/Authentication/auth.rb'
 require_relative '../../lib/Validation/validate.rb'
 require 'test/unit'
 

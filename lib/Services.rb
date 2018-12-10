@@ -1,4 +1,5 @@
 require 'time'
+require_relative 'Authentication/auth_request.rb'
 
 class Services
 	@token = "" 
@@ -25,7 +26,7 @@ class Services
 
 	def self.get_token
 		if (@token.nil? or @token.empty?) or (Time.now > @expiration_date)
-			response_obj = Auth::authentication
+			response_obj = SwAuthentication::authentication(@url, @user, @password)
 			@token = response_obj.get_token
 			@expiration_date = Time.at(response_obj.get_time_expire)
 		end

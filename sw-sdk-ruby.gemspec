@@ -1,7 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{sw-sdk-ruby}
-  s.version = "0.0.2.3.pre"
-  s.date = %q{2018-04-12}
+  s.version = "0.0.2.4.pre"
   s.summary = "sw-sdk-ruby"
   s.licenses = ['GPL-3.0']
   s.description = "Librería para timbrado de CFDI a través de WebService"

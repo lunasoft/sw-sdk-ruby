@@ -1,3 +1,4 @@
+
 [![Ruby](http://sw.com.mx/images/logo.png)](http://sw.com.mx/)
 # Requerimientos #
 
@@ -67,7 +68,6 @@ La clase de Balance nos ayuda a obtener información referente a nuestra cuenta.
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Balance/balance.rb'
 ```
 
@@ -107,7 +107,6 @@ La clase de Cancelation nos servirá para cancelar algún comprobante anteriorme
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Cancelation/cancelation.rb'
 ```
 
@@ -152,7 +151,6 @@ Nota: Para realizar el sellado, los certificados del **rfc emisor** deberán est
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Issue/issue.rb'
 ```
 
@@ -193,7 +191,6 @@ La clase Issue nos ayudará a timbrar nuestros documentos JSON por medio de emis
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Issue/issue.rb'
 ```
 
@@ -235,7 +232,6 @@ La clase Stamp se utiliza para el timbrado de documentos XML. El documento deber
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Stamp/stamp.rb'
 ```
 
@@ -273,7 +269,6 @@ Funciones disponibles
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Validation/validate.rb'
 ```
 
@@ -315,7 +310,6 @@ La clase Pendings servirá para obtener una lista de UUID's que tenga pendientes
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'Pendings/pendings.rb'
 ```
 
@@ -357,7 +351,6 @@ La clase AcceptReject servirá para aceptar o rechazar alguna factura que tenga 
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/auth.rb'
 require 'AcceptReject/accept_reject.rb'
 ```
 
@@ -404,7 +397,6 @@ La clase Relations servirá para consultar las facturas que se encuentren relaci
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
 ```rb
-require 'Authentication/Auth.rb'
 require 'Relations/relations.rb'
 ```
 
