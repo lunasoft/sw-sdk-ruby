@@ -116,10 +116,13 @@ class SWstamp
 end
 # Clase Cancelaci&oacute;n
 class SWcancelation
-  # Cancelaci&oacute;n por UUID, recibe strings URL, Token, RFC Emisor, UUID
-  def cancelByUUID(cURL, cToken, cRFC, cUUID )
+  # Cancelaci&oacute;n por UUID, recibe strings URL, Token, RFC Emisor, UUID, Motivo, Rolio UUID sustitucion
+  def cancelByUUID(cURL, cToken, cRFC, cUUID, motivo,fUUID = nil)
 
-    url = URI(cURL+"/cfdi33/cancel/"+cRFC+"/"+cUUID)
+    if fUUID == nil then
+      url = URI(cURL+"/cfdi33/cancel/"+cRFC+"/"+cUUID+"/"+motivo)
+    else
+      url = URI(cURL+"/cfdi33/cancel/"+cRFC+"/"+cUUID+"/"+motivo+"/"+fUUID)
 
     http = Net::HTTP.new(url.host, url.port)
 
@@ -130,10 +133,10 @@ class SWcancelation
     response = http.request(request)
     return response.read_body 
   end
-  # Cancelaci&oacute;n por CSD recibe strings URL, Token, UUID, RFC Emisor, Password, CSD en base64, Key en base64
-  def cancelByCSD(cURL, cToken, cUUID, cRFC, cPassword, cB64CSD, cB64Key)
+  # Cancelaci&oacute;n por CSD recibe strings URL, Token, UUID, RFC Emisor, Password, CSD en base64, Key en base64, motivo cancelación, folio sustitucion UUID
+  def cancelByCSD(cURL, cToken, cUUID, cRFC, cPassword, cB64CSD, cB64Key,motivo,fUUID)
 
-    url = URI(cURL+"/cfdi33/cancel/pfx")
+    url = URI(cURL+"/cfdi33/cancel/csd")
 
     http = Net::HTTP.new(url.host, url.port)
 
@@ -141,13 +144,18 @@ class SWcancelation
     request["Content-Type"] = 'application/json'
     request["Authorization"] = 'bearer '+cToken
     request["Cache-Control"] = 'no-cache'
-    request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'", "b64Cer": "'+cB64CSD+'", "b64Key": "'+cB64Key+'"}'
+
+    if fUUID == nil then
+      request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'", "motivo": "'+motivo+'" , "b64Cer": "'+cB64CSD+'", "b64Key": "'+cB64Key+'"}'
+    else
+      request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'", "motivo": "'+motivo+'" ,"folioSustitucion":"'+fUUID+'", "b64Cer": "'+cB64CSD+'", "b64Key": "'+cB64Key+'"}'
+
 
     response = http.request(request)
     return response.read_body
   end
-  # Cancelaci&oacute;n por PFX recibe strings URL, Token, UUID, RFC Emisor, Password, PFX en base64
-  def cancelByPFX(cURL, cToken, cUUID, cRFC, cPassword, cB64PFX)
+  # Cancelaci&oacute;n por PFX recibe strings URL, Token, UUID, RFC Emisor, Password, PFX en base64,motivo, folio UUID sustitución
+  def cancelByPFX(cURL, cToken, cUUID, cRFC, cPassword, cB64PFX,motivo,fUUID=nil)
 
     url = URI(cURL+"/cfdi33/cancel/pfx")
 
@@ -157,7 +165,11 @@ class SWcancelation
     request["Content-Type"] = 'application/json'
     request["Authorization"] = 'bearer '+cToken
     request["Cache-Control"] = 'no-cache'
-    request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'", "b64Pfx": "'+cB64PFX+'"}'
+
+    if fUUID == nil then
+      request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'","motivo":"'+motivo+'", "b64Pfx": "'+cB64PFX+'"}'
+    else
+      request.body = '{"uuid": "'+cUUID+'", "password": "'+cPassword+'", "rfc": "'+cRFC+'","motivo":"'+motivo+'","folioSustitucion":"'+fUUID+'", "b64Pfx": "'+cB64PFX+'"}'
 
     response = http.request(request)
     return response.read_body
