@@ -9,6 +9,8 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/rubygems-3.3.7/
+/nbproject/
 
 # Used by dotenv library to load environment variables.
 # .env
