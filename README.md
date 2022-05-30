@@ -257,14 +257,12 @@ Las funciones correspondientes al objeto que regresan estas funciones son las si
 
 Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
 
-La clase Validation servirá para validar que algunas cosas se encuentren de manera correcta antes de proceder al timbrado del mismo. Por ejemplo, nos pueden ayudar a decir si nuestro XML no tiene algún error, o consultar algún RFC de la lista de contribuyentes obligados.
+La clase Validation servirá para validar si nuestro XML no tiene algún error.
 
 Funciones disponibles
 
 - set(params)
 - validate_xml(xml)
-- validate_LRFC(rfc)
-- validate_LCO(no_cert)
 
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
@@ -278,10 +276,6 @@ Ejemplo de uso
 Validate::set(params)
 response_xml = Validate::validateXml(xml)
 puts response_xml.get_response
-response_LRFC = Validate::validate_LRFC(rfc)
-puts response_LRFC.get_data
-response_LCO = Validate::validate_LCO(no_cert)
-puts responseNoCert.get_data
 ```
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
