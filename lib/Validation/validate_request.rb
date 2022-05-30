@@ -19,26 +19,4 @@ class SwValidate
     response_obj = GenericResponse.new(response)
     return response_obj.validate_status_code(response_obj)
   end
-
-  def self.validate_LRFC(url, token, rfc)
-    url = URI(url + "/lrfc/" + rfc)
-    http = Net::HTTP.new(url.host, url.port)
-    request = Net::HTTP::Get.new(url)
-    request["Authorization"] = 'bearer ' + token
-    request["Cache-Control"] = 'no-cache'
-    response = http.request(request)
-    response_obj = GenericResponse.new(response)
-    return response_obj.validate_status_code(response_obj)
-  end
-
-  def self.validate_LCO(url, token, num_cert)
-    url = URI(url + "/lco/" + num_cert)
-    http = Net::HTTP.new(url.host, url.port)
-    request = Net::HTTP::Get.new(url)
-    request["Authorization"] = 'bearer ' + token
-    request["Cache-Control"] = 'no-cache'
-    response = http.request(request)
-    response_obj = GenericResponse.new(response)
-    return response_obj.validate_status_code(response_obj)
-  end
 end
