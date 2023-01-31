@@ -10,7 +10,7 @@ end
 
 class RelationsTest < Test::Unit::TestCase 
     def test_relations_csd
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_csd = read_file('../../resources/b64_csd.txt')
         b64_key = read_file('../../resources/b64_key.txt')
         password_csd = '12345678a'
@@ -21,7 +21,7 @@ class RelationsTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_relations_pfx
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_pfx = read_file('../../resources/b64_pfx.txt')
         password_csd = '12345678a'
         uuid = "77e5ee7e-518e-48d1-b719-2562eaf9cb1f"
@@ -31,7 +31,7 @@ class RelationsTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_relations_uuid
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         uuid = "77e5ee7e-518e-48d1-b719-2562eaf9cb1f"
         rfc = 'LAN7008173R5'
         Relations::set(params)
@@ -39,7 +39,7 @@ class RelationsTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_relations_xml
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         xml_relations = read_file('../../resources/xml_relations.xml')
         Relations::set(params)
         response = Relations::relations_xml(xml_relations)
