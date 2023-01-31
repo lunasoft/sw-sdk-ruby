@@ -11,7 +11,7 @@ def read_file(file_name)
 
 class IssueTest < Test::Unit::TestCase 
     def test_issue_JSON_v1
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], 'password' => ENV["SDKTEST_PASSWORD"]}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         json = read_file("resources/cfdi.json")
         json_hash = JSON.parse(json)
         fecha = Time.at(Time.now.to_i - 86400)
