@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{sw-sdk-ruby}
-  s.version = "0.0.3.1.pre"
+  s.version = "0.0.4.1.pre"
   s.date = %q{2023-01-31}
   s.summary = "sw-sdk-ruby"
   s.licenses = ['GPL-3.0']
