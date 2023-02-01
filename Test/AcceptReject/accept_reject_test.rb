@@ -10,7 +10,7 @@ end
 
 class AcceptRejectTest < Test::Unit::TestCase 
     def test_accept_reject_csd
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_csd = read_file('../../resources/b64_csd.txt')
         b64_key = read_file('../../resources/b64_key.txt')
         password_csd = '12345678a'
@@ -22,7 +22,7 @@ class AcceptRejectTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_accept_reject_pfx
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_pfx = read_file('../../resources/b64_pfx.txt')
         password_csd = '12345678a'
         uuids = []
@@ -33,14 +33,14 @@ class AcceptRejectTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_accept_reject_uuid
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         rfc = 'LAN7008173R5'
         AcceptReject::set(params)
         response = AcceptReject::accept_reject_uuid("FD74D156-B9B0-44A5-9906-E08182E8363E", rfc, "Rechazo")
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_accept_reject_xml
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         xml_accept_reject = read_file('../../resources/xml_accept.xml')
         AcceptReject::set(params)
         response = AcceptReject::accept_reject_xml(xml_accept_reject)

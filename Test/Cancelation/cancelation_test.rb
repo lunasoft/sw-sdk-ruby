@@ -10,7 +10,7 @@ def read_file(file_name)
 
 class CancelationTest < Test::Unit::TestCase 
     def test_cancelation_csd
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_csd = read_file("../../resources/b64_csd.txt")
         b64_key = read_file("../../resources/b64_key.txt")
         password_csd = "12345678a"
@@ -21,7 +21,7 @@ class CancelationTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_Cancelation_pfx
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         b64_pfx = read_file("../../resources/b64_pfx.txt")
         password_csd = "12345678a"
         uuid = "3b99397c-7ca3-4dda-bd03-4a9e55a58e70"
@@ -31,14 +31,14 @@ class CancelationTest < Test::Unit::TestCase
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_cancelation_xml
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         xml = read_file("../../resources/cancel_xml.xml")
         Cancelation::set(params)
         response = Cancelation::cancel_xml(xml)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_cancelation_uuid
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         uuid = "3b99397c-7ca3-4dda-bd03-4a9e55a58e70"
         rfc = "LAN7008173R5"
         Cancelation::set(params)

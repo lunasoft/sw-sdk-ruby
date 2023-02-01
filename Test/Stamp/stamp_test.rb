@@ -10,32 +10,32 @@ end
 
 class StampTest < Test::Unit::TestCase 
     def test_stamp_v1
-        xml = read_file('resources/xml33.xml')
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        xml = read_file('resources/cfdi40.xml')
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Stamp::set(params)
         response = Stamp::stamp_v1(xml)
         assert(response.get_message =~ /^307/, "Expected \"error 307\" but was #{response.get_message}")
     end
 
     def test_stamp_v2
-        xml = read_file('resources/xml33.xml')
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        xml = read_file('resources/cfdi40.xml')
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Stamp::set(params)
         response = Stamp::stamp_v2(xml)
         assert(response.get_message =~ /^307/, "Expected \"error 307\" but was #{response.get_message}")
     end
 
     def test_stamp_v3
-        xml = read_file('resources/xml33.xml')
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        xml = read_file('resources/cfdi40.xml')
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Stamp::set(params)
         response = Stamp::stamp_v3(xml)
         assert(response.get_message =~ /^307/, "Expected \"error 307\" but was #{response.get_message}")
     end
 
     def test_stamp_v4
-        xml = read_file('resources/xml33.xml')
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        xml = read_file('resources/cfdi40.xml')
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Stamp::set(params)
         response = Stamp::stamp_v4(xml)
         assert(response.get_message =~ /^307/, "Expected \"error 307\" but was #{response.get_message}")

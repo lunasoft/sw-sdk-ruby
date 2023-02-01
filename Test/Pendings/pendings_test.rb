@@ -3,7 +3,7 @@ require 'test/unit'
 
 class PendingsTest < Test::Unit::TestCase 
     def test_pendings
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         rfc = 'LAN7008173R5'
         Pendings::set(params)
         response = Pendings::get_pendings(rfc)

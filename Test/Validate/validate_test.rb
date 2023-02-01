@@ -10,7 +10,7 @@ end
 
 class ValidateTest < Test::Unit::TestCase 
     def test_validate_xml
-        params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
+        params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         xml = read_file('../../resources/xml_done.xml')
         Validate::set(params)
         response = Validate::validate_xml(xml)
