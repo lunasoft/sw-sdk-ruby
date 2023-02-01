@@ -1,10 +1,11 @@
 require 'net/http'
 require 'securerandom'
+require 'json'
 require_relative '../Response/generic_response.rb'
 
 class SwCancelation
-  def self.cancel_uuid(url, token, uuid, rfc)
-    url = URI(url + "/cfdi33/cancel/" + rfc + "/" + uuid)
+  def self.cancel_uuid(url, token, uuid, rfc, motivo, folioSustitucion)
+    url = URI("#{url}/cfdi33/cancel/#{rfc}/#{uuid}/#{motivo}/#{folioSustitucion}")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Authorization"] = 'bearer ' + token
@@ -14,27 +15,29 @@ class SwCancelation
     return response_obj.validate_status_code(response_obj)
   end
  
-  def self.cancel_csd(url, token, uuid, rfc, password, csd, key)
+  def self.cancel_csd(url, token, uuid, rfc, password, csd, key, motivo, folioSustitucion)
     url = URI(url + "/cfdi33/cancel/csd")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = 'application/json'
     request["Authorization"] = 'bearer ' + token
     request["Cache-Control"] = 'no-cache'
-    request.body = '{"uuid": "' + uuid + '", "password": "' + password + '", "rfc": "' + rfc + '", "b64Cer": "' + csd + '", "b64Key": "' + key + '"}'
+    data = { uuid: uuid, rfc: rfc, b64Cer: csd, b64Key: key, password: password, motivo: motivo, folioSustitucion: folioSustitucion }
+    request.body = data.to_json
     response = http.request(request)
     response_obj = GenericResponse.new(response)
     return response_obj.validate_status_code(response_obj)
   end
 
-  def self.cancel_pfx(url, token, uuid, rfc, password, pfx)
+  def self.cancel_pfx(url, token, uuid, rfc, password, pfx, motivo, folioSustitucion)
     url = URI(url + "/cfdi33/cancel/pfx")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = 'application/json'
     request["Authorization"] = 'bearer ' + token
     request["Cache-Control"] = 'no-cache'
-    request.body = '{"uuid": "' + uuid + '", "password": "' + password + '", "rfc": "' + rfc + '", "b64Pfx": "' + pfx + '"}'
+    data = { uuid: uuid, rfc: rfc, b64Pfx: pfx, password: password, motivo: motivo, folioSustitucion: folioSustitucion }
+    request.body = data.to_json
     response = http.request(request)
     response_obj = GenericResponse.new(response)
     return response_obj.validate_status_code(response_obj)
