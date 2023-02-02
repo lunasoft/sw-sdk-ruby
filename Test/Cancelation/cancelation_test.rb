@@ -29,9 +29,9 @@ class CancelationTest < Test::Unit::TestCase
         uuid = "3d565100-3518-43f9-9a87-fddb4a1a6453"
         rfc = "EKU9003173C9"
         motivo = "01"
-        folioSustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
+        folio_sustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
         Cancelation::set(params)
-        response = Cancelation::cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key, motivo, folioSustitucion)
+        response = Cancelation::cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key, motivo, folio_sustitucion)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_Cancelation_pfx
@@ -52,9 +52,9 @@ class CancelationTest < Test::Unit::TestCase
         uuid = "3d565100-3518-43f9-9a87-fddb4a1a6453"
         rfc = "EKU9003173C9"
         motivo = "01"
-        folioSustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
+        folio_sustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
         Cancelation::set(params)
-        response = Cancelation::cancel_pfx(uuid, rfc, password_csd, b64_pfx, motivo, folioSustitucion)
+        response = Cancelation::cancel_pfx(uuid, rfc, password_csd, b64_pfx, motivo, folio_sustitucion)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
     def test_cancelation_xml
@@ -78,9 +78,9 @@ class CancelationTest < Test::Unit::TestCase
         uuid = "3d565100-3518-43f9-9a87-fddb4a1a6453"
         rfc = "EKU9003173C9"
         motivo = "01"
-        folioSustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
+        folio_sustitucion = "b02f0526-ad1a-4a0e-a493-17fb0c192f7d"
         Cancelation::set(params)
-        response = Cancelation::cancel_uuid(uuid, rfc, motivo, folioSustitucion)
+        response = Cancelation::cancel_uuid(uuid, rfc, motivo, folio_sustitucion)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
     end
 end
