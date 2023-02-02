@@ -8,8 +8,7 @@ class SignTest < Test::Unit::TestCase
         xml = TestHelper::read_file('resources/cfdi40.xml')
         pfx = TestHelper::create_pfx
         password = "12345678a"
-        cfdi = TestHelper::get_cfdi(xml)
-        xml_signed = Sign::sign_cfdi(cfdi, pfx, password)
+        xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
         params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Stamp::set(params)
         response = Stamp::stamp_v1(xml_signed)
