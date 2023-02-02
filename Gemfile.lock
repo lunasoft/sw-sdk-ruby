@@ -1,11 +1,23 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    date (3.3.3)
+    json (2.6.3)
+    net-http (0.3.2)
+      uri
+    securerandom (0.2.2)
+    time (0.2.1)
+      date
+    uri (0.12.0)
 
 PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  json (~> 2.6, >= 2.6.3)
+  net-http (~> 0.3.2)
+  securerandom (~> 0.2.2)
+  time (~> 0.2.1)
 
 BUNDLED WITH
    2.4.6
