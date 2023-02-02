@@ -17,8 +17,4 @@ class Relations < Services
 	def self.relations_pfx(uuid, rfc, password, pfx)
 		return SwRelations::relations_pfx(Services::get_url, Services::get_token, uuid, rfc, password, pfx)
 	end
-
-	def self.relations_xml(xml)
-		return SwRelations::relations_xml(Services::get_url, Services::get_token, xml)
-	end
 end

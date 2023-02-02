@@ -5,7 +5,6 @@ class AcceptReject < Services
 	def self.set(params)
 		Services::set_data(params)
 	end
-
 	def self.accept_reject_csd(uuids, rfc, password, csd, key)
 		return SwAcceptReject::accept_reject_csd(Services::get_url, Services::get_token, uuids, rfc, password, csd, key)
 	end
