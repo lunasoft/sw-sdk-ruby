@@ -5,6 +5,9 @@ GEM
     json (2.6.3)
     net-http (0.3.2)
       uri
+    nokogiri (1.14.1-x64-mingw-ucrt)
+      racc (~> 1.4)
+    racc (1.6.2)
     securerandom (0.2.2)
     time (0.2.1)
       date
@@ -16,6 +19,7 @@ PLATFORMS
 DEPENDENCIES
   json (~> 2.6, >= 2.6.3)
   net-http (~> 0.3.2)
+  nokogiri (~> 1.14, >= 1.14.1)
   securerandom (~> 0.2.2)
   time (~> 0.2.1)
 
