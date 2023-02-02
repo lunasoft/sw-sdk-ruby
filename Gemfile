@@ -2,4 +2,7 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+gem 'net-http', '~> 0.3.2'
+gem 'json', '~> 2.6', '>= 2.6.3'
+gem 'securerandom', '~> 0.2.2'
+gem 'time', '~> 0.2.1'
