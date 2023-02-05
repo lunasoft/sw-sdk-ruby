@@ -1,74 +1,74 @@
+[![Ruby](https://sw.com.mx/wp-content/themes/sw/images/logo-swsapien.svg)](http://sw.com.mx/)
 
-[![Ruby](http://sw.com.mx/images/logo.png)](http://sw.com.mx/)
-# Requerimientos #
+# SW-Sdk-Ruby
 
-**Ruby 2.1** o superior.
+Librería donde están integradas las API's de los servicios SW, timbrado, cancelaciones, etc, además de servicio de sellado de CFDI 4.0.
 
-[Net/Http](https://rubygems.org/gems/net-http-persistent/versions/3.0.0)
+## Contenido
 
-[URI](https://rubygems.org/gems/uri-handler/versions/1.0.2)
+***
+### Compatibilidad
 
-**Instalación con RubyGems**
+* **Ruby 2.7** o superior.
+
+### Dependencias 
+
+* [Net/Http](https://rubygems.org/gems/net-http-persistent/versions/3.0.0)
+
+* [json](https://rubygems.org/gems/nokogiri)
+
+* [securerandom](https://rubygems.org/gems/nokogiri)
+
+* [time](https://rubygems.org/gems/nokogiri)
+
+* [nokogiri](https://rubygems.org/gems/nokogiri)
+
+### Instalación con RubyGems
 
 Ejecutar los comandos directamente en la consola tal cual aparecen en la página de rubygems, en este caso:
 
->- gem install net-http-persistent
->- gem install uri-handler
+> bundle install
 
-# Consumo #
+## Consumo
 
-Para efectos prácticos, usaremos el siguiente array asociativo como conjunto de parámetros utilizados por los servicios. 
+Para inicializar la clase de un servicio se debera enviar un array que incluya la informacion de la url del entorno, el usuario y la contraseña.
 
-> params = {"url" => 'http://services.test.sw.com.mx', "user" => 'demo', "password" => '123456789'}
 
-## Authentication ##
+> params = {"url" => 'http://services.test.sw.com.mx', "user" => 'user@test.com.mx', "password" => '123456789'}
 
-Parámetros necesarios: url, user y password.
+## Autenticacion
 
-La clase de authentication, nos sirve para obtener un token de 2 hrs de duración. Podrá ser utilizado en los siguientes servicios para consumo.
+Servicio de autenticacion, contiene un metodo para la obtencion de un token temporal con vigencia de hasta dos horas.
 
-**Funciones disponibles**
-
-- set(Params)
-- authentication
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+***
 
 ```rb
-require 'Authentication/auth.rb'
-```
+require_relative 'Authentication/auth.rb'
 
-**Ejemplo de uso**
-
-```rb
 Auth::set(params)
-token = Auth::authentication.get_token
+response = Auth::authentication
 ```
 
-Las funciones utilizables para el objeto obtenido son las siguientes
+## Timbrado
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_time_expire*
->- *get_token*
->- *get_status_code*
-
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
- 
-## Balance ##
-
-Parámetros necesarios: [url, user y password] o [url y token].
-
-La clase de Balance nos ayuda a obtener información referente a nuestra cuenta. Así sabremos cuando nos quedan pocos timbres o cuantos tenemos asignados, etc. 
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+Servicio de timbrado en el cual se recibe un CFDI previamente sellado en formato XML.
 
 ```rb
-require 'Balance/balance.rb'
+require_relative 'Stamp/stamp.rb'
+
+Stamp::set(params)
+response = Stamp::stamp_v1(xml_signed)
+```
+
+## Emision Timbrado JSON
+
+Servicio de timbrado en el cual se recibe un CFDI sin sellar en formato JSON. Este servicio sella y timbra el comprobante.
+
+```rb
+require 'Issue/issue.rb'
+
+Issue::set(params)
+result_issue = Issue::issue_JSON_v3(json_hash.to_json)
 ```
 
 **Ejemplo de uso**
