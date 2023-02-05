@@ -71,40 +71,45 @@ Issue::set(params)
 result_issue = Issue::issue_JSON_v3(json_hash.to_json)
 ```
 
-**Ejemplo de uso**
+## Cancelación
+
+Servicio de cancelacion de CFDI, existen 4 metodos los cuales reciben diferente parámetros.
+
+* Cancelacion CSD
 
 ```rb
-Balance::set(params)
-response = Balance::account_balance
-timbres = response.get_data['saldoTimbres']
+require 'Cancelation/cancelation.rb'
+
+Cancelation::set(params)
+response = Cancelation::cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key, motivo)
 ```
 
-Las funciones utilizables para el objeto obtenido son las siguientes
+* Cancelacion UUID
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+```rb
+require 'Cancelation/cancelation.rb'
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+Cancelation::set(params)
+response = Cancelation::cancel_uuid(uuid, rfc, motivo)
+```
 
-## Cancelación ##
+* Cancelacion PFX
 
-Parámetros necesarios: [url, user y password] o [url y token]. Además de los parámetros que nos sean necesarios dependiendo del tipo de cancelación a usar.
+```rb
+require 'Cancelation/cancelation.rb'
 
-La clase de Cancelation nos servirá para cancelar algún comprobante anteriormente ya timbrado, teniendo diversas opciones para poder cancelar dicho documento.
+Cancelation::set(params)
+response = Cancelation::cancel_pfx(uuid, rfc, password_csd, b64_pfx, motivo)
+```
 
-**Funciones disponibles**
+* Cancelacion XML
 
- - cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key)
- - cancel_uuid(uuid, rfc)
- - cancel_pfx(uuid, rfc, password_csd, b64_pfx)
- - cancel_xml(xml_cancel)
+```rb
+require 'Cancelation/cancelation.rb'
 
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+Cancelation::set(params)
+response = Cancelation::cancel_xml(xml)
+```
 
 ```rb
 require 'Cancelation/cancelation.rb'
@@ -394,31 +399,7 @@ Importar la clase al comienzo de nuestro programa de la siguiente manera
 require 'Relations/relations.rb'
 ```
 
-**Ejemplo de uso**
-
-```rb
-b64_csd = read_file('../../resources/b64CSD.txt')
-b64_key = read_file('../../resources/b64Key.txt')
-password_csd = '12345678a'
-uuid = "77e5ee7e-518e-48d1-b719-2562eaf9cb1f"
-rfc = 'LAN7008173R5'
-Relations::set(params)
-response =  Relations::relations_csd(uuid, rfc, password_csd, b64_csd, b64_key)
-```
-
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
-
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
-
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
-
-## Status Cfdi ##
+## Status Cfdi
 
 Parámetros necesarios: [url de consulta, action], así como parámetros correspondientes a la factura como son: rfcEmisor, rfcReceptor, total, y uuid.
 
