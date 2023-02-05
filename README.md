@@ -29,12 +29,17 @@ Ejecutar los comandos directamente en la consola tal cual aparecen en la página
 
 > bundle install
 
-## Consumo
+### Consumo
 
 Para inicializar la clase de un servicio se debera enviar un array que incluya la informacion de la url del entorno, el usuario y la contraseña.
 
+* Pruebas:
 
 > params = {"url" => 'http://services.test.sw.com.mx', "user" => 'user@test.com.mx', "password" => '123456789'}
+
+* Produccion:
+
+> params = {"url" => 'https://services.sw.com.mx', "user" => 'user@test.com.mx', "password" => '123456789'}
 
 ## Autenticacion
 
