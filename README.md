@@ -124,141 +124,37 @@ response = Validate::validate_xml(xml)
 
 ## Cancelaciones Pendientes
 
-Parámetros necesarios: [user, password y url] o [token y url]. Además de el RFC del cual consultaremos los UUID's pendientes.
+Servicio para consultar las cancelaciones pendientes de aceptacion.
 
-La clase Pendings servirá para obtener una lista de UUID's que tenga pendientes el RFC.
-
-**Funciones disponibles**
-
-- set(params)
-- get_pendings(rfc)
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+**Funciones disponibles
 
 ```rb
 require 'Pendings/pendings.rb'
-```
 
-**Ejemplo de uso**
-
-```rb
-rfc = 'LAN7008173R5'
 Pendings::set(params)
-reponse = Pendings::get_pendings(rfc)
+response = Pendings::get_pendings(rfc)
 ```
 
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
+## Aceptacion/Rechazo Cancelacion
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+Servicio para aceptar o rechazar una solicitud de cancelacion.
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
-
-## AcceptReject ##
-
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
-
-La clase AcceptReject servirá para aceptar o rechazar alguna factura que tenga pendiente el RFC asociado.
-
-**Funciones disponibles**
-
-- set(params)
-- accept_reject_csd(uuids, rfc, password, csd, key)
-- accept_reject_pfx(uuids, rfc, password, pfx)
-- accept_reject_uuid(uuid, rfc, action)
-- accept_reject_xml(xml)
-> Action puede ser "aceptacion" o "rechazo"
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+* ### Aceptacion
 
 ```rb
-require 'AcceptReject/accept_reject.rb'
+
 ```
 
-**Ejemplo de uso**
+* ### Rechazo
 
 ```rb
-b64_csd = read_file('../../resources/b64CSD.txt')
-b64_key = read_file('../../resources/b64Key.txt')
-password_csd = '12345678a'
-uuids = []
-uuids << {"uuid" => "6b02b155-25fd-488d-862b-5a5dc5694b62", "action" => "Rechazo"}
-uuids << {"uuid" => "ef47cd9e-b495-483d-b7ad-7f374fe8e353", "action" => "Rechazo"}
-rfc = 'LAN7008173R5'
-AcceptReject::set(params)
-response = AcceptReject::accept_reject_csd(uuids, rfc, password_csd, b64_csd, b64_key)
-puts response.get_response
+
 ```
 
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
-
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
-
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
-
-## Relations ##
-
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
-
-La clase Relations servirá para consultar las facturas que se encuentren relacionadas a un UUID.
-
-**Funciones disponibles**
-
-- set(params)
-- relations_csd(uuid, rfc, passwordcsd, b64CSD, b64Key)
-- relations_pfx(uuid, rfc, passwordcsd, b64PFX)
-- relations_uuid(uuid, rfc)
-- relations_xml(xml)
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+## Relacionados
 
 ```rb
 require 'Relations/relations.rb'
 ```
 
-## Status Cfdi
-
-Parámetros necesarios: [url de consulta, action], así como parámetros correspondientes a la factura como son: rfcEmisor, rfcReceptor, total, y uuid.
-
-La clase Status Cfdi servirá para consultar el estatus de cancelación, si es cancelable, vigente o cancelada de nuestras facturas.
-
-**Funciones disponibles**
-
-- status(rfc_emisor, rfc_receptor, total, uuid, url, action)
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
-
-```rb
-require_relative 'StatusCfdi/status_cfdi.rb'
-```
-
-**Ejemplo de uso**
-
-```rb
-url = 'https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc'
-action = 'http://tempuri.org/IConsultaCFDIService/Consulta'
-rfc_emisor = 'LAN7008173R5'
-rfc_receptor = 'LAN8507268IA'
-total = '5800.00'
-uuid = 'a9143107-25c5-4fb9-b0eb-2fcbcb855967'
-response = StatusCfdi::status(rfc_emisor, rfc_receptor, total, uuid, url, action)
-```
-
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
-
->- *get_status_code*
->- *get_response*
->- *get_codigoEstatus*
->- *get_esCancelable*
->- *get_estado*
->- *get_estatusCancelacion*
+## Estatus CFDI
