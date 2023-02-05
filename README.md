@@ -111,44 +111,18 @@ Cancelation::set(params)
 response = Cancelation::cancel_xml(xml)
 ```
 
-## Validación ##
+## Validación
 
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
-
-La clase Validation servirá para validar si nuestro XML no tiene algún error.
-
-Funciones disponibles
-
-- set(params)
-- validate_xml(xml)
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
+Servicio de validacion de CFDI en formato XML.
 
 ```rb
 require 'Validation/validate.rb'
-```
 
-Ejemplo de uso
-
-```rb
 Validate::set(params)
-response_xml = Validate::validateXml(xml)
-puts response_xml.get_response
+response = Validate::validate_xml(xml)
 ```
 
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
-
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
-
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
-
-## Pendings ##
+## Cancelaciones Pendientes
 
 Parámetros necesarios: [user, password y url] o [token y url]. Además de el RFC del cual consultaremos los UUID's pendientes.
 
