@@ -454,3 +454,38 @@ Las funciones correspondientes al objeto que regresan estas funciones son las si
 >- *get_esCancelable*
 >- *get_estado*
 >- *get_estatusCancelacion*
+
+## Storage #
+
+Parámetros necesarios: [url_api, url, user y password] o [url_api y token].
+
+La clase de Storage permite recuperar un XML enviando como parámetro el folio fiscal del comprobante.
+
+** Funciones disponibles *
+
+- get_xml(uuid)
+
+Importar la clase al comienzo de nuestro programa de la siguiente manera
+
+```rb
+require 'Storage/storage.rb'
+```
+
+Setear los parámetros.
+
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "token" => ENV["SDKTEST_TOKEN"]}
+Storage::set(params)
+```
+
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
+Storage::set(params)
+```
+
+**Ejemplo de uso**
+
+```rb
+uuid = "b35d525e-d845-42c9-bbfb-eeeef601e2b4"
+response = Storage::get_xml(uuid)
+```
