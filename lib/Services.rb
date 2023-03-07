@@ -4,12 +4,17 @@ require_relative 'Authentication/auth_request.rb'
 class Services
 	@token = "" 
 	@url = ""
+	@url_api = ""
 	@user = ""
 	@password = ""
 	@expiration_date = Time.at(0)
 
 	def self.get_url
 		return @url
+	end
+
+	def self.get_url_api
+		return @url_api
 	end
 
 	def self.get_user
@@ -40,10 +45,14 @@ class Services
 
 	private
 	def self.set_data(params)
+		if(!params.has_key?('url') and !params.has_key?('url_api'))
+			Services::raise_exception("URL debe especificarse")
+		end
 		if (params.has_key?('url') and params['url'])
 			@url = params['url']
-		else 
-			Services::raise_exception("URL debe especificarse")
+		end
+		if (params.has_key?('url_api') and params['url_api'])
+			@url_api = params['url_api']
 		end
 
 		if (params.has_key?('user') and params['user']) and (params.has_key?('password') and params['password'])
@@ -57,5 +66,4 @@ class Services
 			end
 		end
 	end
-
 end
