@@ -461,7 +461,7 @@ Parámetros necesarios: [url_api, url, user y password] o [url_api y token].
 
 La clase de Storage permite recuperar un XML enviando como parámetro el folio fiscal del comprobante.
 
-** Funciones disponibles *
+**Funciones disponibles**
 
 - get_xml(uuid)
 
