@@ -27,7 +27,7 @@ class Response
 	end
 
 	def validate_status_code(response)
-		if(response.get_status == 'success')
+		if(response.get_status != nil && (response.get_status == 'success' || response.get_status == "error"))
 			return response
 		else
 			case response.get_status_code.to_i
