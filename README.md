@@ -1,21 +1,57 @@
+# sw-sdk-ruby
+SW Smarterweb libreria para consumir los servicios de cfdi
 
-[![Ruby](http://sw.com.mx/images/logo.png)](http://sw.com.mx/)
-# Requerimientos #
+[![SW sapien](https://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/68712/SW_smarter-Servicios_web.png)](http://sw.com.mx/)
 
-**Ruby 2.1** o superior.
+Librería *Ruby* para el consumo de los servicios de SW sapien®.
 
-[Net/Http](https://rubygems.org/gems/net-http-persistent/versions/3.0.0)
+## Contenido 
 
-[URI](https://rubygems.org/gems/uri-handler/versions/1.0.2)
+- [Compatibilidad](#Compatibilidad)
+- [Dependencias](#Dependencias)
+- [Documentación](#Documentación)
+- [Instalación](#Instalación)
+- [Implementación](#Implementación)
+---
 
-**Instalación con RubyGems**
+### Compatibilidad :clipboard:
+- CFDI 4.0
+- [Ruby 2.1 o superior](https://www.ruby-lang.org/en/downloads/releases/)
 
-Ejecutar los comandos directamente en la consola tal cual aparecen en la página de rubygems, en este caso:
+### Dependencias :toolbox:
+- [rubygems](https://guides.rubygems.org/)
+- [uri](https://rubygems.org/gems/uri-handler/versions/1.0.2)
+- [net/http](https://rubygems.org/gems/net-http-persistent/versions/3.0.0)
+- [json](https://ruby-doc.org/core-3.1.2/JSON.html)
 
->- gem install net-http-persistent
->- gem install uri-handler
 
-# Consumo #
+### Documentación :open_file_folder:
+* [Inicio Rápido](https://developers.sw.com.mx/knowledge-base/conoce-el-proceso-de-integracion-en-solo-7-pasos/)
+* [Documentación Oficial Servicios](http://developers.sw.com.mx)
+* [Documentación Ruby](https://www.ruby-lang.org/en/documentation/)
+
+
+### Instalación :hammer_and_wrench:
+
+Ejecutar los comandos directamente en consola
+
+**[Gestor de paquetes de Windows](https://github.com/microsoft/winget-cli)**
+```shell
+winget install RubyInstallerTeam.Ruby
+```
+**Snap (Ubuntu u otras distribuciones Linux)**
+ ```shell
+$ sudo snap install ruby --classic
+```
+
+**[Instalación con RubyGems](https://rubygems.org/)**
+
+
+ ```shell
+ gem install ruby
+```
+
+### Implementación
 
 Para efectos prácticos, usaremos el siguiente array asociativo como conjunto de parámetros utilizados por los servicios. 
 
@@ -23,12 +59,21 @@ Para efectos prácticos, usaremos el siguiente array asociativo como conjunto de
 
 ## Authentication ##
 
-Parámetros necesarios: url, user y password.
-
 La clase de authentication, nos sirve para obtener un token de 2 hrs de duración. Podrá ser utilizado en los siguientes servicios para consumo.
 
-**Funciones disponibles**
 
+
+<details>
+<summary>
+Authentication
+</summary>
+
+**Parámetros necesarios** 
+* url 
+* user 
+* password
+
+**Funciones disponibles**
 - set(Params)
 - authentication
 
@@ -47,23 +92,30 @@ token = Auth::authentication.get_token
 
 Las funciones utilizables para el objeto obtenido son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_time_expire*
->- *get_token*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_token       |                   |
+|  get_time_expire |                   |
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
  
 ## Balance ##
 
-Parámetros necesarios: [url, user y password] o [url y token].
 
 La clase de Balance nos ayuda a obtener información referente a nuestra cuenta. Así sabremos cuando nos quedan pocos timbres o cuantos tenemos asignados, etc. 
+<details>
+
+<summary>
+Balance
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
 
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
@@ -81,28 +133,48 @@ timbres = response.get_data['saldoTimbres']
 
 Las funciones utilizables para el objeto obtenido son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
-
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
+</details>
 
 ## Cancelación ##
-
-Parámetros necesarios: [url, user y password] o [url y token]. Además de los parámetros que nos sean necesarios dependiendo del tipo de cancelación a usar.
-
 La clase de Cancelation nos servirá para cancelar algún comprobante anteriormente ya timbrado, teniendo diversas opciones para poder cancelar dicho documento.
+
+
+<details>
+
+<summary>
+Cancelation
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+
+Además de los parámetros que nos sean necesarios dependiendo del tipo de cancelación a usar.
 
 **Funciones disponibles**
 
- - cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key)
- - cancel_uuid(uuid, rfc)
- - cancel_pfx(uuid, rfc, password_csd, b64_pfx)
- - cancel_xml(xml_cancel)
+ - cancel_csd(uuid, rfc, password_csd, b64_cer, b64_key, motivo, foliosustitucion)
+ - cancel_uuid(uuid, rfc, motivo, foliosustitucion)
+ - cancel_pfx(uuid, rfc, password_csd, b64_pfx, motivo, foliosustitucion)
+ - cancel_xml(xml_cancel, motivo, foliosustitucion)
+
+| Parámetro         | Descripción       | 
+|-------------------|-------------------|
+|  uuid             | UUID del comprobante       | 
+|  rfc              | RFC del emisor |
+|  b64_cer          | Certificado del emisor en Base64                   | 
+|  b64_key          | Key del emisor en Base64                  | 
+|  b64_pfx          |Archivo Pfx en Base64                   |
+|  password_csd     | Contraseña del certificado                  | 
+|  xml_cancel       | XML con los comprobantes a cancelar               |
+|  motivo           | Clave para expresar el motivo de la cancelación                  |
+|  foliosustitucion | UUID del comprobante que sustituye                  |
 
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
@@ -114,30 +186,39 @@ require 'Cancelation/cancelation.rb'
 
 ```rb
 Cancelation::set(params)
-response_csd = Cancelation::cancel_csd(uuid, rfc, password_csd, b64_csd, b64_key)
-response_uuid = Cancelation::cancel_uuid(uuid, rfc)
-response_pfx = Cancelation::cancel_pfx(uuid, rfc, password_csd, b64_pfx)
-response_xml = Cancelation::cancel_xml(xml_cancel)
+response_csd = Cancelation::cancel_csd(uuid, rfc, password_csd, b64_cer, b64_key, motivo)
+response_uuid = Cancelation::cancel_uuid(uuid, rfc, motivo, foliosustitucion)
+response_pfx = Cancelation::cancel_pfx(uuid, rfc, password_csd, b64_pfx, motivo)
+response_xml = Cancelation::cancel_xml(xml_cancel, motivo, foliosustitucion)
 ```
 
 Las funciones utilizables para estos objetos de cancelación son los siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
+</details>
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+## Emisión Timbrado ##
 
-## Issue ##
-
-Parámetros necesarios: [user, password y url] o [token y url], así como el XML a timbrar utilizando emisión-timbrado.
 
 La clase Issue nos ayudará a timbrar nuestros documentos XML por medio de emisión-timbrado. A diferencia de la clase Stamp, esta clase además de timbrar el documento le pondrá el sello.
-Nota: Para realizar el sellado, los certificados del **rfc emisor** deberán estar almacenados en el administrador de timbres.
+
+:pushpin:  ***NOTA:*** Para realizar el sellado, los certificados del **rfc emisor** deberán estar almacenados en el administrador de timbres.
+
+<details>
+
+<summary>
+Issue
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+* xml
 
 **Funciones disponibles**
 
@@ -146,7 +227,8 @@ Nota: Para realizar el sellado, los certificados del **rfc emisor** deberán est
 - issue_v2(xml, b64)
 - issue_v3(xml, b64)
 - issue_v4(xml, b64)
--  > **b64** es un parámetro opcional y se debe indicar en *true* si el XML va encodeado en base64. De no indicarse por defecto se tomará el valor de *false*
+ 
+> **b64** es un parámetro opcional y se debe indicar en *true* si el XML va encodeado en base64. De no indicarse por defecto se tomará el valor de *false*
 
 Importar la clase al comienzo de nuestro programa de la siguiente manera
 
@@ -162,23 +244,32 @@ response = Issue::issue_v4(xml,false)
 File.open(response.get_data['uuid']+'.xml', 'w') { |file| file.write(response.get_data['cfdi']) }
 ```
 
-Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
+Las funciones correspondientes al objeto Issue son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
 
-## IssueJson ##
+## Timbrado JSON ##
 
-Parámetros necesarios: [user, password y url] o [token y url], así como el JSON a timbrar utilizando emisión-timbrado.
 
 La clase Issue nos ayudará a timbrar nuestros documentos JSON por medio de emisión-timbrado. 
+<details>
+
+<summary>
+IssueJson
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+* JSON
+
 
 **Funciones disponibles**
 
@@ -204,21 +295,30 @@ File.open(response.get_data['uuid']+'.xml', 'w') { |file| file.write(response.ge
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
 
-## Stamp ##
-
-Parámetros necesarios: [user, password y url] o [token y url], así como el XML a timbrar.
+## Timbrado ##
 
 La clase Stamp se utiliza para el timbrado de documentos XML. El documento deberá venir ya con el sello.
+
+<details>
+
+<summary>
+Stamp
+</summary>
+
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+* xml sellado
 
 **Funciones disponibles**
 
@@ -244,22 +344,39 @@ File.open(response.get_data['uuid']+'.xml', 'w') { |file| file.write(response.ge
 ```
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
+
+:pushpin: ***NOTA:*** Existen varias versiones de respuesta, las cuales son las siguientes:
+
+| Version |                         Respuesta                             | 
+|---------|---------------------------------------------------------------|
+|  V1     | Devuelve el timbre fiscal digital                             | 
+|  V2     | Devuelve el timbre fiscal digital y el CFDI timbrado          | 
+|  V3     | Devuelve el CFDI timbrado                                     | 
+|  V4     | Devuelve todos los datos del timbrado                         |
+
 ## Validación ##
-
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
 
 La clase Validation servirá para validar si nuestro XML no tiene algún error.
 
-Funciones disponibles
+<details>
+
+<summary>
+Validation
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+
+**Funciones disponibles**
 
 - set(params)
 - validate_xml(xml)
@@ -280,21 +397,29 @@ puts response_xml.get_response
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
+</details>
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+## Pendientes de Aceptación/Rechazo ##
 
-## Pendings ##
-
-Parámetros necesarios: [user, password y url] o [token y url]. Además de el RFC del cual consultaremos los UUID's pendientes.
 
 La clase Pendings servirá para obtener una lista de UUID's que tenga pendientes el RFC.
+<details>
+
+<summary>
+Pendings
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
+
+Además de el RFC del cual consultaremos los UUID's pendientes.
 
 **Funciones disponibles**
 
@@ -317,21 +442,29 @@ reponse = Pendings::get_pendings(rfc)
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
 
-## AcceptReject ##
+## Aceptar o Rechazar cancelación ##
 
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
 
 La clase AcceptReject servirá para aceptar o rechazar alguna factura que tenga pendiente el RFC asociado.
+
+<details>
+
+<summary>
+AcceptReject
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
 
 **Funciones disponibles**
 
@@ -365,21 +498,29 @@ puts response.get_response
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
 
-## Relations ##
+</details>
 
-Parámetros necesarios: [user, password y url] o [token y url]. Además de parámetros adicionales según sea el caso.
+## Relacionados ##
 
 La clase Relations servirá para consultar las facturas que se encuentren relacionadas a un UUID.
+
+<details>
+
+<summary>
+Relations
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token
 
 **Funciones disponibles**
 
@@ -408,21 +549,30 @@ response =  Relations::relations_csd(uuid, rfc, password_csd, b64_csd, b64_key)
 
 Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
 
-**En caso de éxito**
->- *get_status*
->- *get_data*
->- *get_response*
->- *get_status_code*
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
 
-**En caso de error**
->- *get_message*
->- *get_messageDetail*
+</details>
 
-## Status Cfdi ##
+## Estatus Cfdi ##
 
-Parámetros necesarios: [url de consulta, action], así como parámetros correspondientes a la factura como son: rfcEmisor, rfcReceptor, total, y uuid.
+
 
 La clase Status Cfdi servirá para consultar el estatus de cancelación, si es cancelable, vigente o cancelada de nuestras facturas.
+
+<details>
+
+<summary>
+StatusCfdi
+</summary>
+
+**Parámetros necesarios** 
+* url
+* user y password o url y token.
 
 **Funciones disponibles**
 
@@ -455,11 +605,22 @@ Las funciones correspondientes al objeto que regresan estas funciones son las si
 >- *get_estado*
 >- *get_estatusCancelacion*
 
+</details>
+
 ## Storage #
 
-Parámetros necesarios: [url_api, url, user y password] o [url_api y token].
 
 La clase de Storage permite recuperar un XML enviando como parámetro el folio fiscal del comprobante.
+<details>
+
+<summary>
+Storage
+</summary>
+
+**Parámetros necesarios** 
+* url api
+* url
+* user y password o url api y token
 
 **Funciones disponibles**
 
@@ -489,3 +650,5 @@ Storage::set(params)
 uuid = "b35d525e-d845-42c9-bbfb-eeeef601e2b4"
 response = Storage::get_xml(uuid)
 ```
+
+</details>
