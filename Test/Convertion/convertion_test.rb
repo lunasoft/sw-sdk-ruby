@@ -35,7 +35,7 @@ class ConvertionTest < Test::Unit::TestCase
 
     private
     def convertion_success_test(file_name)
-        xml = TestHelper::read_file('../Resources/cfdi/cfdi40.xml')
+        xml = TestHelper::read_file(file_name)
         pfx = TestHelper::create_pfx
         password = "12345678a"
         xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
