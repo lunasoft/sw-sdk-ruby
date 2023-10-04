@@ -1,11 +1,9 @@
 require_relative '../Services.rb'
 require_relative 'stamp_request.rb'
-
 class Stamp < Services
 	def self.set(params)
 		Services::set_data(params)
 	end
-
 	def self.stamp_v1(xml, b64 = false)
 		SwStamp::stamp(Services::get_url, Services::get_token, 'v1', xml, b64)
 	end

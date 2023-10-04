@@ -1,4 +1,5 @@
-require_relative '../lib/Sign/sign.rb'
+require_relative '../../lib/Sign/sign.rb'
+
 class TestHelper
     def self.read_file(file_name)
         file = File.open(file_name, "r")
@@ -25,8 +26,8 @@ class TestHelper
     end
 
     def self.create_pfx
-        cert_file = File.binread("resources/csd/csd.cer")
-        pkey_file = File.binread("resources/csd/csd.key")
+        cert_file = File.binread("../Resources/csd/csd.cer")
+        pkey_file = File.binread("../Resources/csd/csd.key")
         password = "12345678a"
         return Sign::create_pfx(cert_file, pkey_file, password)
     end
