@@ -26,8 +26,8 @@ class TestHelper
     end
 
     def self.create_pfx
-        cert_file = File.binread("../Resources/csd/csd.cer")
-        pkey_file = File.binread("../Resources/csd/csd.key")
+        cert_file = File.binread(File.join(__dir__, "../Resources/csd/csd.cer"))
+        pkey_file = File.binread(File.join(__dir__, "../Resources/csd/csd.key"))
         password = "12345678a"
         return Sign::create_pfx(cert_file, pkey_file, password)
     end
