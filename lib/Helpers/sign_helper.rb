@@ -5,7 +5,7 @@ require 'base64'
 class SignHelper
     def self.get_cadena_original(xml, is_tfd = false)
         xml_doc = Nokogiri::XML(xml)
-        xslt_doc = !is_tfd ? Nokogiri::XSLT(File.open("../../resources/xslt/cadenaoriginal_4_0.xslt")) 
+        xslt_doc = !is_tfd ? Nokogiri::XSLT(File.open(File.join(__dir__, "../../resources/xslt/cadenaoriginal_4_0.xslt")))
                             : Nokogiri::XSLT(File.open("../../resources/xslt/cadenaoriginal_TFD_1_1.xslt"))
         return xslt_doc.transform(xml_doc)
     end
