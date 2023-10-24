@@ -1,5 +1,6 @@
 require 'nokogiri'
 require_relative '../../lib/Stamp/stamp.rb'
+require_relative '../../lib/Helpers/sign_helper.rb'
 require_relative '../Helpers/test_helper.rb'
 require 'test/unit'
 
