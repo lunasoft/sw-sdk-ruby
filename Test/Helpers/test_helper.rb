@@ -7,6 +7,12 @@ class TestHelper
         file.close
         return data
     end
+    def self.get_cadena_original(xml, is_tfd = false)
+        xml_doc = Nokogiri::XML(xml)
+        xslt_doc = !is_tfd ? Nokogiri::XSLT(File.open(File.join(__dir__, "../../resources/xslt/cadenaoriginal_4_0.xslt")))
+                            : Nokogiri::XSLT(File.open(File.join(__dir__, "../../resources/xslt/cadenaoriginal_TFD_1_1.xslt")))
+        return xslt_doc.transform(xml_doc)
+    end
     def self.get_cfdi(xml)
         xml_doc = Nokogiri::XML(xml)
         comprobante_node = xml_doc.at_xpath("//cfdi:Comprobante", { "cfdi" => "http://www.sat.gob.mx/cfd/4" })
