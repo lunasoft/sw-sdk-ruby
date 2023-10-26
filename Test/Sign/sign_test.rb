@@ -4,7 +4,7 @@ require_relative '../Helpers/test_helper.rb'
 require 'test/unit'
 require 'json'
 
-class SignTest < Test::Unit::TestCase
+  class SignTest < Test::Unit::TestCase
     def test_sign_success
       xml = TestHelper::read_file('../Resources/cfdi/cfdi40.xml')
       pfx = TestHelper::create_pfx
@@ -13,7 +13,10 @@ class SignTest < Test::Unit::TestCase
       params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
       Stamp::set(params)
       response = Stamp::stamp_v1(xml_signed)
-      assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status} - #{response.get_message}")
-      assert(response.get_data.to_s.strip != "") 
+      assert(response.get_status == "success")
+      assert(response.get_data != nil)
+      assert(response.get_data.to_s.strip != "")
     end
   end
+
+  
