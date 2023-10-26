@@ -11,8 +11,8 @@ end
 class AcceptRejectTest < Test::Unit::TestCase 
     def test_accept_reject_csd
         params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
-        b64_csd = read_file('resources/b64_csd.txt')
-        b64_key = read_file('resources/b64_key.txt')
+        b64_csd = read_file('../Resources/csd/b64_csd.txt')
+        b64_key = read_file('../Resources/csd/b64_key.txt')
         password_csd = '12345678a'
         uuids = []
         uuids << {"uuid" => "7FDA7D8C-1B1A-4E24-9AF6-7F7CB3950D51", "action" => "Rechazo"}
@@ -23,7 +23,7 @@ class AcceptRejectTest < Test::Unit::TestCase
     end
     def test_accept_reject_pfx
         params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
-        b64_pfx = read_file('resources/b64_pfx.txt')
+        b64_pfx = read_file('../Resources/csd/b64_pfx.txt')
         password_csd = '12345678a'
         uuids = []
         uuids << {"uuid" => "7FDA7D8C-1B1A-4E24-9AF6-7F7CB3950D51", "action" => "Rechazo"}
@@ -41,7 +41,7 @@ class AcceptRejectTest < Test::Unit::TestCase
     end
     def test_accept_reject_xml
         params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
-        xml_accept_reject = read_file('resources/xml_accept.xml')
+        xml_accept_reject = read_file('../Resources/cfdi/xml_accept.xml')
         AcceptReject::set(params)
         response = AcceptReject::accept_reject_xml(xml_accept_reject)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")

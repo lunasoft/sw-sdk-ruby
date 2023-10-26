@@ -11,7 +11,7 @@ end
 class ValidateTest < Test::Unit::TestCase 
     def test_validate_xml
         params = {"url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
-        xml = read_file('resources/xml_done.xml')
+        xml = read_file('../Resources/cfdi/xml_done.xml')
         Validate::set(params)
         response = Validate::validate_xml(xml)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
