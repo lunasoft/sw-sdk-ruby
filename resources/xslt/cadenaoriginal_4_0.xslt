@@ -29,6 +29,7 @@
 	<xsl:include href="certificadodedestruccion.xslt"/>
 	<xsl:include href="obrasarteantiguedades.xslt"/>
 	<xsl:include href="ComercioExterior11.xslt"/>
+  <xsl:include href="ComercioExterior20.xslt"/>
 	<xsl:include href="ine11.xslt"/>
 	<xsl:include href="iedu.xslt"/>
 	<xsl:include href="ventavehiculos11.xslt"/>
