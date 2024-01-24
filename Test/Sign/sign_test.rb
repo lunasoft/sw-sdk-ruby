@@ -10,7 +10,7 @@ require 'json'
       pfx = TestHelper::create_pfx
       password = "12345678a"
       xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
-      params = { "url" => 'http://services.test.sw.com.mx', "user" => 'david.reyes@sw.com.mx', "password" => 'Test2023..' }
+      params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
       Stamp::set(params)
       response = Stamp::stamp_v1(xml_signed)
       assert(response.get_status == "success")
@@ -25,7 +25,7 @@ require 'json'
       pfx = TestHelper::create_pfx
       password = "12345678a"
       xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
-      params = { "url" => 'http://services.test.sw.com.mx', "user" => 'david.reyes@sw.com.mx', "password" => 'Test2023..' }
+      params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
       Stamp::set(params)
       response = Stamp::stamp_v1(xml_signed)
       assert(response.get_status == "success")
@@ -40,7 +40,7 @@ require 'json'
       pfx = TestHelper::create_pfx
       password = "12345678a"
       xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
-      params = { "url" => 'http://services.test.sw.com.mx', "user" => 'david.reyes@sw.com.mx', "password" => 'Test2023..' }
+      params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
       Stamp::set(params)
       response = Stamp::stamp_v1(xml_signed)
       assert(response.get_status == "success")
