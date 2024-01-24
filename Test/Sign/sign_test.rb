@@ -19,4 +19,33 @@ require 'json'
     end
   end
 
+  class SignTest < Test::Unit::TestCase
+    def test_sign_success_cceP
+      xml = TestHelper::read_file('../Resources/cfdi/cce20Propietario.xml')
+      pfx = TestHelper::create_pfx
+      password = "12345678a"
+      xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
+      params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
+      Stamp::set(params)
+      response = Stamp::stamp_v1(xml_signed)
+      assert(response.get_status == "success")
+      assert(response.get_data != nil)
+      assert(response.get_data.to_s.strip != "")
+    end
+  end
+  
+  class SignTest < Test::Unit::TestCase
+    def test_sign_success_cce
+      xml = TestHelper::read_file('../Resources/cfdi/cce20.xml')
+      pfx = TestHelper::create_pfx
+      password = "12345678a"
+      xml_signed = TestHelper::get_signed_cfdi(xml, pfx, password)
+      params = { "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"] }
+      Stamp::set(params)
+      response = Stamp::stamp_v1(xml_signed)
+      assert(response.get_status == "success")
+      assert(response.get_data != nil)
+      assert(response.get_data.to_s.strip != "")
+    end
+  end
   
