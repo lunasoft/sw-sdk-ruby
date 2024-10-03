@@ -12,9 +12,12 @@ class SignService
         comprobante_node['NoCertificado'] = cert_number
         cadena = SignHelper::get_cadena_original(xml_doc.to_xml())
         sello = SignHelper::get_sello(cadena, pfx, password)
-        comprobante_node["Sello"] = sello
+        sello_limpio = sello.gsub(/\s+/, '').strip
+        comprobante_node["Sello"] = sello_limpio
+
         return xml_doc.to_xml(:indent => 2, :save_with => Nokogiri::XML::Node::SaveOptions::AS_XML)
     end
+
     def self.create_pfx(certificate, private_key, password)
         return CertificateHelper::create_pfx(certificate, private_key, password)
     end
