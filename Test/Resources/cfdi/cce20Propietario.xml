@@ -19,7 +19,7 @@
     </cfdi:Conceptos>
     <cfdi:Complemento>
         <cce20:ComercioExterior Version="2.0" MotivoTraslado="05" ClaveDePedimento="A1"
-            CertificadoOrigen="0" Incoterm="CFR" TipoCambioUSD="17.1125" TotalUSD="25.56">
+            CertificadoOrigen="0" Incoterm="CFR" TipoCambioUSD="19.6440" TotalUSD="25.56">
             <cce20:Emisor>
                 <cce20:Domicilio Calle="CALLE DEL PAPEL" CodigoPostal="76199" Colonia="0214"
                     Estado="QUE" Localidad="01" Municipio="014" Pais="MEX" />
