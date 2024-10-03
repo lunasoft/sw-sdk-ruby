@@ -28,7 +28,7 @@
         </cfdi:Traslados>
     </cfdi:Impuestos>
     <cfdi:Complemento>
-        <cce20:ComercioExterior Version="2.0" ClaveDePedimento="A1" CertificadoOrigen="0" Incoterm="FOB" TipoCambioUSD="17.1125" TotalUSD="400.00">
+        <cce20:ComercioExterior Version="2.0" ClaveDePedimento="A1" CertificadoOrigen="0" Incoterm="FOB" TipoCambioUSD="19.6440" TotalUSD="400.00">
             <cce20:Emisor>
                 <cce20:Domicilio Calle="CALLE DEL PAPEL" Colonia="0214" Localidad="01" Municipio="014" Estado="QUE" Pais="MEX" CodigoPostal="76199" />
             </cce20:Emisor>
