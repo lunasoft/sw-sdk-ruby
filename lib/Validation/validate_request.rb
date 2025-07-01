@@ -1,4 +1,3 @@
-require 'json'
 require_relative '../Response/generic_response.rb'
 require_relative '../Helpers/request_helper.rb'
 
