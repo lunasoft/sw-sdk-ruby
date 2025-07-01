@@ -76,7 +76,7 @@ class RequestHelper
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == 'https'
-      http.ssl_version = :TLSv1_2
+      http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
       request = build_http_request(method, uri)
       headers.each { |k, v| request[k] = v }
