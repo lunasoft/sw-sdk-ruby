@@ -652,3 +652,91 @@ response = Storage::get_xml(uuid)
 ```
 
 </details>
+
+## PDF ##
+
+<details>
+<summary>
+Generar PDF
+</summary>
+
+Este método genera y obtiene un pdf en base64 a partir de un documento XML timbrado y una plantilla. Puede ser consumido ingresando tu usuario y contraseña así como tambien ingresando solo el token. 
+
+**Parámetros necesarios** 
+* url api
+* url
+* user y password o url api y token
+
+**Funciones disponibles**
+
+- set(params)
+- generate_pdf(xml,templateId,logob64,extras)
+
+El logo y el arreglo de extras son atributos opcionales que pueden omitirse.
+
+Importar la clase al comienzo de nuestro programa de la siguiente manera
+
+```rb
+require 'Pdf/pdf.rb'
+```
+
+Setear los parámetros para autentificación con usuario y contraseña.
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => 'user', "password" => 'password'}
+Pdf::set(params)
+```
+Setear los parámetros para autentificación mediante token
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "token" => 'token'}
+Pdf:set(params)
+```
+
+**Ejemplo de uso**
+
+```rb
+Pdf::set(params)
+response = Pdf::generate_pdf(xml,'cfdi40')
+puts response.get_contentB64 
+```
+
+**Ejemplo de uso con todos los atributos**
+
+```rb
+Pdf::set(params)
+templateId = 'cfdi40'
+logo = "/9j/4AAQSkZJRgABAQEASAB....."
+extras = {'REFERENCIA': "Referencia de pruebas"}
+response = Pdf::generate_pdf(xml, templateId, logo, extras)
+puts response.get_contentB64 
+```
+Las funciones correspondientes al objeto que regresan estas funciones son las siguientes
+
+| En caso de éxito | En caso de error  | 
+|------------------|-------------------|
+|  get_status      | get_message       | 
+|  get_data        | get_messageDetail | 
+|  get_response    |                   | 
+|  get_status_code |                   |
+|  get_contentB64  |                   |
+|  get_contentSizeBytes |                   |
+|  get_uuid        |                   |
+|  get_serie       |                   |
+|  get_folio       |                   |
+|  get_stampDate   |                   |
+|  get_issuedDate  |                   |
+|  get_rfcIssuer   |                   |
+|  get_rfcReceptor |                   |
+|  get_total       |                   |
+
+
+:pushpin: ***NOTA:*** Existen varias plantillas de PDF para el CFDI segun el tipo de comprobante, las cuales son las siguientes:
+
+|    Version 4.0     |  Plantilla para el complemento  |   Template Id   |
+|--------------------|---------------------------------|-----------------|
+| :white_check_mark: | Factura ingreso, egreso         | cfdi40          |
+| :white_check_mark: | Nómina                          | payroll40       |
+| :white_check_mark: | Pagos                           | payment20       |
+| :white_check_mark: | Carta porte                     | billoflading40  |
+
+Para mayor referencia de estas plantillas de PDF, favor de visitar el siguiente [link](https://developers.sw.com.mx/knowledge-base/plantillas-pdf/).
+</details>

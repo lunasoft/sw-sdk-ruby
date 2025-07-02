@@ -1,15 +1,12 @@
-require 'net/http'
 require_relative 'auth_response.rb'
+require_relative '../Helpers/request_helper.rb'
 
 class SwAuthentication
   def self.authentication(url, user, password)
-    url = URI(url + "/security/authenticate")
-    http = Net::HTTP.new(url.host, url.port)
-    request = Net::HTTP::Post.new(url)
-    request["user"] = user
-    request["password"] = password
-    response = http.request(request)
+    endpoint = URI(url + "/v2/security/authenticate")
+    payload = {'user': user, 'password': password}
+    response = RequestHelper.post_json_request_without_token(endpoint,payload)
     response_obj = AuthResponse.new(response)
     return response_obj.validate_status_code(response_obj)
-  end 
+  end
 end

@@ -1,15 +1,10 @@
-require 'net/http'
 require_relative '../Response/generic_response.rb'
+require_relative '../Helpers/request_helper.rb'
 
 class SwPendings
   def self.pendings(url, token, rfc)
-    url = URI(url + "/pendings/" + rfc)
-    http = Net::HTTP.new(url.host, url.port)
-    request = Net::HTTP::Get.new(url)
-    request["Authorization"] = 'bearer ' + token
-    request["Content-Type"] = 'application/json'
-    request["Cache-Control"] = 'no-cache'
-    response = http.request(request)
+    endpoint = URI(url + "/pendings/" + rfc)
+    response = RequestHelper.get_json_request(endpoint,token)
     response_obj = GenericResponse.new(response)
     return response_obj.validate_status_code(response_obj)
   end

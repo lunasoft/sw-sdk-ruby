@@ -6,7 +6,7 @@ require 'json'
 
 class SignTest < Test::Unit::TestCase
   def test_sign_success
-    xml = TestHelper::read_file('../Resources/cfdi/cfdi40.xml')
+    xml = TestHelper::read_file(File.join(__dir__, "../Resources/cfdi/cfdi40.xml"))
     pfx = TestHelper::create_pfx
     password = "12345678a"
     xml_signed, cadena_original = TestHelper::get_signed_cfdi(xml, pfx, password)
@@ -22,8 +22,8 @@ class SignTest < Test::Unit::TestCase
 end
 
 class SignTest < Test::Unit::TestCase
-  def test_sign_success_cceP
-    xml = TestHelper::read_file('../Resources/cfdi/cce20Propietario.xml')
+  def test_sign_success_cp31
+    xml = TestHelper::read_file(File.join(__dir__, "../Resources/cfdi/cfdi40_cp31.xml"))
     pfx = TestHelper::create_pfx
     password = "12345678a"
     xml_signed, cadena_original = TestHelper::get_signed_cfdi(xml, pfx, password)
@@ -39,8 +39,8 @@ class SignTest < Test::Unit::TestCase
 end
 
 class SignTest < Test::Unit::TestCase
-  def test_sign_success_cce
-    xml = TestHelper::read_file('../Resources/cfdi/cce20.xml')
+  def test_sign_success_nom
+    xml = TestHelper::read_file(File.join(__dir__, "../Resources/cfdi/nomina12.xml"))
     pfx = TestHelper::create_pfx
     password = "12345678a"
     xml_signed, cadena_original = TestHelper::get_signed_cfdi(xml, pfx, password)
