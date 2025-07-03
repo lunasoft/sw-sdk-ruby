@@ -1,31 +1,30 @@
-<SolicitudAceptacionRechazo Fecha="2018-09-20T14:48:09" RfcPacEnviaSolicitud="LSO1306189R5" RfcReceptor="EKU9003173C9"
-    xmlns="http://cancelacfd.sat.gob.mx"
+<SolicitudAceptacionRechazo xmlns="http://cancelacfd.sat.gob.mx"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Fecha="2025-05-22T00:10:00" RfcPacEnviaSolicitud="SPR190613I52" RfcReceptor="CACX7605101P8">
     <Folios>
-        <UUID>FD74D156-B9B0-44A5-9906-E08182E8363E</UUID>
+        <UUID>721BCA35-0A85-407E-AB9B-36C29CFE525C</UUID>
         <Respuesta>Aceptacion</Respuesta>
     </Folios>
     <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
         <SignedInfo>
-            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
-            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
             <Reference URI="">
                 <Transforms>
-                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
                 </Transforms>
-                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-                <DigestValue>jQnUPr6fkbDIZXlqZ6ykVQq/ZT0=</DigestValue>
+                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                <DigestValue>+4VvgAoqU91nGXOqU5zGk5Ipj2M=</DigestValue>
             </Reference>
         </SignedInfo>
-        <SignatureValue>cRTCLcoA9BWwIRIbCPyIFhhTyXw2BMKTJCaybnkXMhxH+Vw4GnHTgOnZ0osutst75Em1WvAZOzm/mqhKaGSjUy5ux2hV2hk92k1SRCCrlyva2ASPO8oNh2ENbXVRWemzBF/XOQgOz+fP2uxhgDLBuFhXfkHO1ZHsRPJIOVQy/AD5wahYHyzJEkseFW03CazCFByt8HmRgYjW1MwJFK3/A8PdG0vLSSTw5vqak4R+oPJKQYwPwgTa55Rlz414IPDhtReszkR77p7TrzZi3NKUv2vs3rxzV8Z+9g+xJ/VfGmRMh+GnA+OAmS+h6OGa2ZI5C/5quAYV3i30PHqhksCwGw==</SignatureValue>
+        <SignatureValue>ZlcKIgdVmthf7Zq3i6peTNc+YhKxiLoxj9XBqwLQ9r0QCyJXJcnby7N+hi96J52FI7HVU+AkFDKmWI4iKbdMhaOqv5ZBdnF7ICeNTsAPFt1Ohp6/YzVwwuW8qiDmzol+zOpPzNZjt70tuGtUKpe/ZvRk6Z0tWqwQfIegzYG1RXgVlH8Gak9pd4fF7mUCUDevuY5/sZCexSdOvqUpj7+5GJkVw5X48eDimQy5lOtPD6McQqCmb8tXUgkv1LXCB1Wa/aaG4E6VnjofueFzCMDge1CKcAhDQyiUHUBon59Oy4ik0SgMGQj3rfs/jLA5g9V7KOMPI30lpaxRHEbNcjaY7A==</SignatureValue>
         <KeyInfo>
             <X509Data>
+                <X509Certificate>MIIFgDCCA2igAwIBAgIUMzAwMDEwMDAwMDA1MDAwMDMzMTcwDQYJKoZIhvcNAQELBQAwggErMQ8wDQYDVQQDDAZBQyBVQVQxLjAsBgNVBAoMJVNFUlZJQ0lPIERFIEFETUlOSVNUUkFDSU9OIFRSSUJVVEFSSUExGjAYBgNVBAsMEVNBVC1JRVMgQXV0aG9yaXR5MSgwJgYJKoZIhvcNAQkBFhlvc2Nhci5tYXJ0aW5lekBzYXQuZ29iLm14MR0wGwYDVQQJDBQzcmEgY2VycmFkYSBkZSBjYWxpejEOMAwGA1UEEQwFMDYzNzAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBDSVVEQUQgREUgTUVYSUNPMREwDwYDVQQHDAhDT1lPQUNBTjERMA8GA1UELRMIMi41LjQuNDUxJTAjBgkqhkiG9w0BCQITFnJlc3BvbnNhYmxlOiBBQ0RNQS1TQVQwHhcNMjMwNTA5MjEzNzM3WhcNMjcwNTA5MjEzNzM3WjCBpzEdMBsGA1UEAxMUWE9DSElMVCBDQVNBUyBDSEFWRVoxHTAbBgNVBCkTFFhPQ0hJTFQgQ0FTQVMgQ0hBVkVaMR0wGwYDVQQKExRYT0NISUxUIENBU0FTIENIQVZFWjEWMBQGA1UELRMNQ0FDWDc2MDUxMDFQODEbMBkGA1UEBRMSQ0FDWDc2MDUxME1HVFNIQzA0MRMwEQYDVQQLEwpTdWN1cnNhbCAyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApG2xe/cC25l8y4uF/cq/R4CipKrbDJ+mVHkQ0X0vd/7/bjCvphYuF41HIr91T3Ux51jkuIBZdZ1A9o2W7nwt+MNY165p6+/dunXPDMaM8gIOShITK1Hno+6VYr9sbuciYkrxTbY1kU9M8f8TJ1Z8zYPTxHvuRma7fcWyg1uNXgQyuOFRDwzIk3pDK1YtDkDZzxpkDokYFu4oKhHb1TKUtT2uhGc3fmYG5zP6/bUDDgf4ugGNQccsd5QWm4SzplEsiyK2ggfLQ8q6ZC4SPQZolM10iUyOst4iZ9a5V7/7xOJW9qir40hCguZqhyvamsO6UXok9mOYAOo4rErV4D7FJQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAnrMfNcLjPZOw85YRNwwyhieoFp5E2swK9DMS8PwbmE50g0fRV3E25LNc7JzCzFC/Aai1ghNWPBr0SeHoBh4pizIj93frkmkOPzHPZk6DXIOW7zng+QuB5osQ+XFv3WPNYuNlqsmlgwOooW0t2cgY8eSUgupSkh4HQMQ9fOCzeL1bTLUFwGLB7qCxT/OAT9IOM59OJgytPD/j5jb8hScFOQJg/Hd0HunYuB1+DLiGSUt31JhkbiAOI+GLH0VaiR0tOkJHKqVvvgAX2JwouYrLBODoEsvgPd28YclHho8kIIu2rDWxPVBfbVLpSBQcp2vYo9GQg5u43kOg84xE5+Llm5zsNtkbvpdsbfk7IYTAB38GGDll0VysHtOw8oNAmCK8Fndjjc1PYOArJmrZqSaDTj5v3n/mNnN0a6ZEtE58IwpDhFbT/M4nD9Ct8WZYdOkMvSg/mqrlfd84y39Jz0u/yrGcgszqGJdjTOM+C83rZJP6ldlDAhbks2mJofXH/69W07gkMy5x94ZuJdCTd05n9puQitYvfKGVz+XEtcexs2S9b20FRNQsdQbFIjmANjEITVkxbAOnj2Lait7WNyoVx/BIZRNO7WWMxMVuYpJY1vY7fZw4zDa5Da7fPTmA5AbiFt+T0nZDXhoeTWGs7FEC1Ydpx7EIX8cVcxtsOVbp12I=</X509Certificate>
                 <X509IssuerSerial>
-                    <X509IssuerName>OID.1.2.840.113549.1.9.2=responsable: ACDMA-SAT, OID.2.5.4.45=2.5.4.45, L=COYOACAN, S=CIUDAD DE MEXICO, C=MX, PostalCode=06370, STREET=3ra cerrada de cadiz, E=oscar.martinez@sat.gob.mx, OU=SAT-IES Authority, O=SERVICIO DE ADMINISTRACION TRIBUTARIA, CN=AC UAT</X509IssuerName>
-                    <X509SerialNumber>292233162870206001759766198444326234574038512436</X509SerialNumber>
+                    <X509IssuerName>CN=AC UAT, O=SERVICIO DE ADMINISTRACION TRIBUTARIA, OU=SAT-IES Authority, E=oscar.martinez@sat.gob.mx, STREET=3ra cerrada de caliz, PostalCode=06370, C=MX, ST=CIUDAD DE MEXICO, L=COYOACAN, OID.2.5.4.45=2.5.4.45, OID.1.2.840.113549.1.9.2=responsable: ACDMA-SAT</X509IssuerName>
+                    <X509SerialNumber>3330303031303030303030353030303033333137</X509SerialNumber>
                 </X509IssuerSerial>
-                <X509Certificate>MIIFuzCCA6OgAwIBAgIUMzAwMDEwMDAwMDA0MDAwMDI0MzQwDQYJKoZIhvcNAQELBQAwggErMQ8wDQYDVQQDDAZBQyBVQVQxLjAsBgNVBAoMJVNFUlZJQ0lPIERFIEFETUlOSVNUUkFDSU9OIFRSSUJVVEFSSUExGjAYBgNVBAsMEVNBVC1JRVMgQXV0aG9yaXR5MSgwJgYJKoZIhvcNAQkBFhlvc2Nhci5tYXJ0aW5lekBzYXQuZ29iLm14MR0wGwYDVQQJDBQzcmEgY2VycmFkYSBkZSBjYWRpejEOMAwGA1UEEQwFMDYzNzAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBDSVVEQUQgREUgTUVYSUNPMREwDwYDVQQHDAhDT1lPQUNBTjERMA8GA1UELRMIMi41LjQuNDUxJTAjBgkqhkiG9w0BCQITFnJlc3BvbnNhYmxlOiBBQ0RNQS1TQVQwHhcNMTkwNjE3MTk0NDE0WhcNMjMwNjE3MTk0NDE0WjCB4jEnMCUGA1UEAxMeRVNDVUVMQSBLRU1QRVIgVVJHQVRFIFNBIERFIENWMScwJQYDVQQpEx5FU0NVRUxBIEtFTVBFUiBVUkdBVEUgU0EgREUgQ1YxJzAlBgNVBAoTHkVTQ1VFTEEgS0VNUEVSIFVSR0FURSBTQSBERSBDVjElMCMGA1UELRMcRUtVOTAwMzE3M0M5IC8gWElRQjg5MTExNlFFNDEeMBwGA1UEBRMVIC8gWElRQjg5MTExNk1HUk1aUjA1MR4wHAYDVQQLExVFc2N1ZWxhIEtlbXBlciBVcmdhdGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCN0peKpgfOL75iYRv1fqq+oVYsLPVUR/GibYmGKc9InHFy5lYF6OTYjnIIvmkOdRobbGlCUxORX/tLsl8Ya9gm6Yo7hHnODRBIDup3GISFzB/96R9K/MzYQOcscMIoBDARaycnLvy7FlMvO7/rlVnsSARxZRO8Kz8Zkksj2zpeYpjZIya/369+oGqQk1cTRkHo59JvJ4Tfbk/3iIyf4H/Ini9nBe9cYWo0MnKob7DDt/vsdi5tA8mMtA953LapNyCZIDCRQQlUGNgDqY9/8F5mUvVgkcczsIgGdvf9vMQPSf3jjCiKj7j6ucxl1+FwJWmbvgNmiaUR/0q4m2rm78lFAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQBcpj1TjT4jiinIujIdAlFzE6kRwYJCnDG08zSp4kSnShjxADGEXH2chehKMV0FY7c4njA5eDGdA/G2OCTPvF5rpeCZP5Dw504RZkYDl2suRz+wa1sNBVpbnBJEK0fQcN3IftBwsgNFdFhUtCyw3lus1SSJbPxjLHS6FcZZ51YSeIfcNXOAuTqdimusaXq15GrSrCOkM6n2jfj2sMJYM2HXaXJ6rGTEgYmhYdwxWtil6RfZB+fGQ/H9I9WLnl4KTZUS6C9+NLHh4FPDhSk19fpS2S/56aqgFoGAkXAYt9Fy5ECaPcULIfJ1DEbsXKyRdCv3JY89+0MNkOdaDnsemS2o5Gl08zI4iYtt3L40gAZ60NPh31kVLnYNsmvfNxYyKp+AeJtDHyW9w7ftM0Hoi+BuRmcAQSKFV3pk8j51la+jrRBrAUv8blbRcQ5BiZUwJzHFEKIwTsRGoRyEx96sNnB03n6GTwjIGz92SmLdNl95r9rkvp+2m4S6q1lPuXaFg7DGBrXWC8iyqeWE2iobdwIIuXPTMVqQb12m1dAkJVRO5NdHnP/MpqOvOgLqoZBNHGyBg4Gqm4sCJHCxA1c8Elfa2RQTCk0tAzllL4vOnI1GHkGJn65xokGsaU4B4D36xh7eWrfj4/pgWHmtoDAYa8wzSwo2GVCZOs+mtEgOQB91/g==</X509Certificate>
             </X509Data>
         </KeyInfo>
     </Signature>

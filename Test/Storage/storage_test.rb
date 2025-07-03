@@ -1,11 +1,11 @@
 require_relative '../../lib/Storage/storage.rb'
 require 'test/unit'
 
-class StorageTest < Test::Unit::TestCase 
+class StorageTest < Test::Unit::TestCase
     def test_auth_storage_success
         params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
         Storage::set(params)
-        uuid = "fddb1164-2e76-4022-93ad-fab600eaccdf"
+        uuid = "23a3788a-3ac1-4b53-bb7b-b64839e6c09b"
         response = Storage::get_xml(uuid)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
         assert(response.get_data != nil?)
@@ -14,7 +14,7 @@ class StorageTest < Test::Unit::TestCase
     def test_storage_success
         params = {"url_api" => 'http://api.test.sw.com.mx', "token" => ENV["SDKTEST_TOKEN"]}
         Storage::set(params)
-        uuid = "fddb1164-2e76-4022-93ad-fab600eaccdf"
+        uuid = "23a3788a-3ac1-4b53-bb7b-b64839e6c09b"
         response = Storage::get_xml(uuid)
         assert(response.get_status == "success", "Expected \"success\" but was #{response.get_status}")
         assert(response.get_data != nil?)
@@ -24,7 +24,7 @@ class StorageTest < Test::Unit::TestCase
         begin
         params = {"url_api" => 'http://api.test.sw.com.mx'}
         Storage::set(params)
-        uuid = "fddb1164-2e76-4022-93ad-fab600eaccdf"
+        uuid = "23a3788a-3ac1-4b53-bb7b-b64839e6c09b"
         response = Storage::get_xml(uuid)
         rescue RuntimeError => e
             assert(e.message == "Datos de autenticación deben especificarse", "Response was #{e.message}")
@@ -34,7 +34,7 @@ class StorageTest < Test::Unit::TestCase
         begin
             params = {"urlAPI" => 'http://api.test.sw.com.mx', "token" => ENV["SDKTEST_TOKEN"]}
             Storage::set(params)
-            uuid = "fddb1164-2e76-4022-93ad-fab600eaccdf"
+            uuid = "23a3788a-3ac1-4b53-bb7b-b64839e6c09b"
             response = Storage::get_xml(uuid)
         rescue RuntimeError => e
             assert(e.message == "URL debe especificarse", "Response was #{e.message}")
