@@ -48,13 +48,13 @@ class SwAccountUser
   end
 
   def self.delete_user(urlApi, token, idUser)
-    endpoint = "#{urlApi}#{@@pathBase}/#{idUser}"
+    endpoint = URI(urlApi+ "#{@@pathBase}/#{idUser}")
     response = RequestHelper.delete_json_request(endpoint, token, nil)
     return AccountUserResponse.new(response)
   end
 
   def self.update_user(urlApi, token, idUser, name, taxId, notificationEmail, phone, isUnlimited)
-    endpoint = "#{urlApi}#{@@pathBase}/#{idUser}"
+    endpoint = URI(urlApi+ "#{@@pathBase}/#{idUser}")
     payload = {
       "idUser" => idUser,
       "name" => name,
