@@ -31,7 +31,7 @@ class SwAccountUser
   end
 
   def self.create_user(urlApi, token, name, taxId, email, stamps, isUnlimited, password, notificationEmail, phone)
-    endpoint = URI(urlApi + "/management/v2/api/dealers/users")
+    endpoint = URI(urlApi + @@pathBase)
     payload = {
       "name" => name,
       "taxId" => taxId,
