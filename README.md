@@ -458,7 +458,7 @@ end
 
 **Ejemplo de consumo de la libreria para obtener las subcuentas**
 ```rb
-response = AccountUser::getUser_all
+response = AccountUser::get_users
 if (response.get_status == "success")
     data = response.get_data
     data.items.each do |user|
@@ -478,8 +478,7 @@ end
 
 **Ejemplo de consumo de la libreria para obtener usuario por ID**
 ```rb
-idUser = "32501CF2-DC62-4370-B47D-25024C44E131"
-response = AccountUser::getUser_by_IdUser(idUser)
+response = AccountUser::get_users(IdUser: "32501CF2-DC62-4370-B47D-25024C44E131")
 if (response.get_status == "success")
     data = response.get_data
     data.items.each do |user|
@@ -499,8 +498,7 @@ end
 
 **Ejemplo de consumo de la libreria para obtener usuario por Email**
 ```rb
-email = "usuario_prueba@example.com"
-response = AccountUser::getUser_by_email(email)
+response = AccountUser::get_users(Email: "usuario_prueba@example.com")
 if (response.get_status == "success")
     data = response.get_data
     data.items.each do |user|
@@ -520,8 +518,7 @@ end
 
 **Ejemplo de consumo de la libreria para obtener usuario por RFC**
 ```rb
-taxId = "AAAA000101010"
-response = AccountUser::getUser_by_taxId(taxId)
+response = AccountUser::get_users(TaxId:"AAAA000101010")
 if (response.get_status == "success")
     data = response.get_data
     data.items.each do |user|
@@ -542,7 +539,7 @@ end
 **Ejemplo de consumo de la libreria para obtener usuarios que esten activos o desactivados**
 ```rb
 #"true" aplica para buscar solo cuentas activas y "false" para cuentas desactivadas
-response = AccountUser::getUser_by_isActive(true)
+response = AccountUser::get_users(IsActive: true)
 if (response.get_status == "success")
     data = response.get_data
     data.items.each do |user|
