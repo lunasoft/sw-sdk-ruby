@@ -19,24 +19,8 @@ class AccountUser < Services
       return SwAccountUser::update_user(Services::get_url_api, Services::get_token, idUser, name, taxId, notificationEmial, phone, isUnlimited)
    end
 
-   def self.getUser_all()
-      return SwAccountUser::get_users(Services::get_url_api, Services::get_token, "All")
-   end
-
-   def self.getUser_by_IdUser(idUser)
-      return SwAccountUser::get_users(Services::get_url_api, Services::get_token, "IdUser", idUser)
-   end
-
-   def self.getUser_by_email(email)
-      return SwAccountUser::get_users(Services::get_url_api, Services::get_token,"Email",nil,email)
-   end
-
-   def self.getUser_by_taxId(taxId)
-      return SwAccountUser::get_users(Services::get_url_api, Services::get_token,"TaxId",nil,nil,taxId)
-   end
-
-   def self.getUser_by_isActive(isActive)
-      return SwAccountUser::get_users(Services::get_url_api, Services::get_token,"IsActive",nil,nil,nil,isActive)
+   def self.get_users(**params)
+      return SwAccountUser.get_users(Services::get_url_api, Services::get_token, **params)
    end
 
 end
