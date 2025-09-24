@@ -35,7 +35,7 @@ class AccountUserTest < Test::Unit::TestCase
   def test_AccountUser_All_auth
     params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
     AccountUser::set(params)
-    response = AccountUser::getUser_all
+    response = AccountUser::get_users
     assert(response.get_status == "success")
     assert(response.get_data != "")
   end
@@ -43,11 +43,11 @@ class AccountUserTest < Test::Unit::TestCase
   def test_AccountUser_by_id
     params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
     AccountUser::set(params)
-    idUser = "32501CF2-DC62-4370-B47D-25024C44E131"
-    response = AccountUser::getUser_by_IdUser(idUser)
+    response = AccountUser::get_users(IdUser: "32501CF2-DC62-4370-B47D-25024C44E131")
     assert(response.get_status == "success")
     assert(response.get_data != "")
     data = response.get_data
+    puts "Consulta por ID"
     data.items.each do |user|
       puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
     end
@@ -56,17 +56,17 @@ class AccountUserTest < Test::Unit::TestCase
   def test_AccountUser_by_email
     params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
     AccountUser::set(params)
-    email = "userRuby_#{ENV['SDKTEST_USER']}"
-    response = AccountUser::getUser_by_email(email)
+    response = AccountUser::get_users(Email: "userRuby_#{ENV['SDKTEST_USER']}")
     assert(response.get_status == "success")
     assert(response.get_data != "")
+    data = response.get_data
   end
 
   def test_AccountUser_by_taxId
     params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
     AccountUser::set(params)
     taxId = "AAAA000101010"
-    response = AccountUser::getUser_by_taxId(taxId)
+    response = AccountUser::get_users(TaxId:"AAAA000101010" )
     assert(response.get_status == "success")
     assert(response.get_data != "")
   end
@@ -74,7 +74,7 @@ class AccountUserTest < Test::Unit::TestCase
   def test_AccountUser_by_isActive
     params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
     AccountUser::set(params)
-    response = AccountUser::getUser_by_isActive(true)
+    response = AccountUser::get_users(IsActive: true)
     assert(response.get_status == "success")
     assert(response.get_data != "")
   end
