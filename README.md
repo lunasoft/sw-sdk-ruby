@@ -61,8 +61,6 @@ Para efectos prácticos, usaremos el siguiente array asociativo como conjunto de
 
 La clase de authentication, nos sirve para obtener un token de 2 hrs de duración. Podrá ser utilizado en los siguientes servicios para consumo.
 
-
-
 <details>
 <summary>
 Authentication
@@ -102,48 +100,9 @@ Las funciones utilizables para el objeto obtenido son las siguientes
 |  get_status_code |                   |
 
 </details>
- 
-## Balance ##
-
-
-La clase de Balance nos ayuda a obtener información referente a nuestra cuenta. Así sabremos cuando nos quedan pocos timbres o cuantos tenemos asignados, etc. 
-<details>
-
-<summary>
-Balance
-</summary>
-
-**Parámetros necesarios** 
-* url
-* user y password o url y token
-
-Importar la clase al comienzo de nuestro programa de la siguiente manera
-
-```rb
-require 'Balance/balance.rb'
-```
-
-**Ejemplo de uso**
-
-```rb
-Balance::set(params)
-response = Balance::account_balance
-timbres = response.get_data['saldoTimbres']
-```
-
-Las funciones utilizables para el objeto obtenido son las siguientes
-
-| En caso de éxito | En caso de error  | 
-|------------------|-------------------|
-|  get_status      | get_message       | 
-|  get_data        | get_messageDetail | 
-|  get_response    |                   | 
-|  get_status_code |                   |
-</details>
 
 ## Cancelación ##
 La clase de Cancelation nos servirá para cancelar algún comprobante anteriormente ya timbrado, teniendo diversas opciones para poder cancelar dicho documento.
-
 
 <details>
 
@@ -257,7 +216,6 @@ Las funciones correspondientes al objeto Issue son las siguientes
 
 ## Timbrado JSON ##
 
-
 La clase Issue nos ayudará a timbrar nuestros documentos JSON por medio de emisión-timbrado. 
 <details>
 
@@ -361,6 +319,361 @@ Las funciones correspondientes al objeto que regresan estas funciones son las si
 |  V2     | Devuelve el timbre fiscal digital y el CFDI timbrado          | 
 |  V3     | Devuelve el CFDI timbrado                                     | 
 |  V4     | Devuelve todos los datos del timbrado                         |
+
+## Usuarios V2 ##
+Métodos para realizar la consulta de informacion de usuarios, así como la creación, actualización y eliminacion  de los mismos
+
+<details>
+
+**Parámetros necesarios** 
+* url
+* url Api
+* user y password o token
+
+**Funciones disponibles**
+
+- set(params)
+- create_user(name, taxId, email, stamps, isUnlimited, password, notificationEmail, phone)
+- delete_user(idUser)
+- update_user(idUser, name, taxId, notificationEmial, phone, isUnlimited)
+- getUser_all()
+- getUser_by_IdUser(idUser)
+- getUser_by_email(email)
+- getUser_by_taxId(taxId)
+- getUser_by_isActive(isActive)
+
+| Dato              | Descripción                                  |
+|-------------------|----------------------------------------------|
+| name              | Nombre del usuario                           |
+| taxId             | RFC del usuario                              |
+| email             | correo del nuevo usuario                     |
+| stamps            | Cantidad de timbres a asignar                |
+| isUnlimited       | Especificar si tendra timbres ilimitados     |
+| password          | Contraseña del usuario                       |
+| notificationEmail | Correo a donde quiere recibir notificaciones |
+| phone             | Número del telefono del usuario              |
+| isActive          | Especifica si la cuenta esta activa o no     |
+
+Importar la clase al comienzo de nuestro programa de la siguiente manera
+
+```rb
+require 'AccountUser/accountUser.rb'
+```
+
+Setear los parámetros
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
+AccountUser::set(params)
+```
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
+AccountUser::set(params)
+```
+</details>
+
+<details>
+  <summary>Crear usuario</summary>
+
+<br>Este método permite crear una subcuenta.
+
+**Ejemplo de consumo de la libreria para crear usuario**
+```rb
+name = "Prueba UT Hijo Ruby"
+taxId = "XAXX010101000"
+email = "userRuby_1@test.com"
+password = "Contrasena_12345678"
+notificationEmail = "userRuby_1@test.com"
+phone = "0000000000"
+response = AccountUser::create_user(name,taxId,email,1,false,password,notificationEmail,phone)
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+
+:pushpin: ***NOTA:*** La contraseña debe cumplir con las siguientes politicas:
+* La contraseña no debe ser igual que el nombre de usuario.
+* La contraseña debe incluir al menos una letra mayúscula.
+* La contraseña debe incluir al menos una letra minúscula
+* La contraseña debe incluir al menos un número.
+* La contraseña debe incluir al menos un símbolo (carácter especial).
+* La contraseña no debe incluir espacios en blanco.
+* La contraseña debe tener entre 10 y 20 caracteres.
+* La contraseña no debe incluir símbolos especiales fuera de lo común.
+* Los caracteres especiales aceptados son los siguientes: !@#$%^&*()_+=\[{\]};:<>|./?,-]
+</details>
+
+<details>
+  <summary>Actualizacion de datos de usuario</summary>
+
+<br>Este método permite Actualizar la información de una subcuenta existente.
+
+> [!NOTE]  
+> Puedes asignarles "None" a las propiedades que no vayas a actualizar.
+
+**Ejemplo de consumo de la libreria para actualizar subcuenta**
+```rb
+idUser = "b9e42c65-4afa-45a2-9b0d-d67b1373a7f4"
+name = "Prueba UT Hijo Python Actualizado"
+taxId = "XAXX010101002"
+phone = "0000000001"
+response = AccountUser::update_user(idUser,name,taxId,nil,phone,false)
+if (response.get_status == "success")
+    puts response.get_data
+    #Solo regresara el Id del usuario actualizado
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Eliminación de usuario</summary>
+
+<br>Este método permite eliminar una subcuenta
+
+**Ejemplo de consumo de la libreria para eliminar subcuenta**
+```rb
+idUser = '2990D2BB-B26A-4FD5-B1CC-07AE84AE8085'
+response = AccountUser::delete_user(idUser)
+if (response.get_status == "success")
+    puts response.get_data
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Obtener todos los usuarios</summary>
+
+<br>Este método permite obtener todos los usuarios que existen
+
+**Ejemplo de consumo de la libreria para obtener las subcuentas**
+```rb
+response = AccountUser::get_users
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Obtener usuario por ID</summary>
+
+<br>Este método permite obtener un usuario por Id
+
+**Ejemplo de consumo de la libreria para obtener usuario por ID**
+```rb
+response = AccountUser::get_users(IdUser: "32501CF2-DC62-4370-B47D-25024C44E131")
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Obtener usuario por Email</summary>
+
+<br>Este método permite obtener un usuario por Email
+
+**Ejemplo de consumo de la libreria para obtener usuario por Email**
+```rb
+response = AccountUser::get_users(Email: "usuario_prueba@example.com")
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Obtener usuario por RFC</summary>
+
+<br>Este método permite obtener un usuario por RFC
+
+**Ejemplo de consumo de la libreria para obtener usuario por RFC**
+```rb
+response = AccountUser::get_users(TaxId:"AAAA000101010")
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>>Obtener usuarios que esten activos o desactivadosC</summary>
+
+<br>Este método permite obtener usuarios que esten activos o desactivados
+
+**Ejemplo de consumo de la libreria para obtener usuarios que esten activos o desactivados**
+```rb
+#"true" aplica para buscar solo cuentas activas y "false" para cuentas desactivadas
+response = AccountUser::get_users(IsActive: true)
+if (response.get_status == "success")
+    data = response.get_data
+    data.items.each do |user|
+      puts "ID: #{user.idUser}, Nombre: #{user.name}, RFC: #{user.taxId}, Email: #{user.email}, Stamps: #{user.stamps}, token: #{user.accessToken}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+## Balance (Administración de saldo) ##
+Métodos para realizar la consulta de saldo así como la asignación y eliminación de timbres a un usuario.
+
+<details>
+
+**Parámetros necesarios** 
+* url
+* url Api
+* user y password o token
+
+**Funciones disponibles**
+
+- set(params)
+- get_balance
+- add_stamps(id,timbres,comment)
+- remove_stamps(id,timbres,comment)
+
+| Parámetro         | Descripción       | 
+|-------------------|-------------------|
+|  id               | Id de la subcuenta     | 
+|  timbres          | Timbres a asignar o remover |
+|  comment          | (Opcional) Comentario con el motivo de asignación o remoción de timbres  | 
+
+Importar la clase al comienzo de nuestro programa de la siguiente manera
+
+```rb
+require 'Balance/balance.rb'
+```
+
+Setear los parámetros
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx', "url" => 'http://services.test.sw.com.mx', "user" => ENV["SDKTEST_USER"], "password" => ENV["SDKTEST_PASSWORD"]}
+Balance::set(params)
+```
+```rb
+params = {"url_api" => 'http://api.test.sw.com.mx',  "token" => ENV["SDKTEST_TOKEN"]}
+Balance::set(params)
+```
+</details>
+
+<details>
+  <summary>Consulta de timbres</summary>
+
+<br>Este método permite consultar el saldo de una cuenta.
+
+**Ejemplo de consumo de la libreria para consultar timbres**
+```rb
+response = Balance::get_balance
+if (response.get_status == "success")
+    puts response.get_data.idUser
+    puts response.get_data.idUserBalance
+    puts response.get_data.stampsAssigned
+    puts response.get_data.stampsUsed
+    puts response.get_data.stampsBalance
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+
+**Ejemplo de consumo de la libreria para consultar timbres imprimiento todos los datos**
+```rb
+response = Balance::get_balance
+if (response.get_status == "success")
+    data = result_balance.get_data
+    data.instance_variables.each do |var|
+        value = data.instance_variable_get(var)
+        puts "#{var}: #{value}"
+    end
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Agregar timbres</summary>
+
+<br>Este método permite agregar n cantidad de timbres a una subcuenta.
+
+> [!NOTE] 
+> El servicio regresa unicamente la cantidad de timbres despues del abono de timbres.
+
+**Ejemplo de consumo de la libreria para agregar timbres**
+```rb
+id = "A1DFC01F-459A-4A05-BF68-1F04D1EF8860"
+timbres = 2
+comment = "Prueba Ruby"
+response = Balance::add_stamps(id,timbres,comment)
+if (response.get_status == "success")
+    puts response.get_data
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+</details>
+
+<details>
+  <summary>Eliminar timbres</summary>
+
+<br>Este método permite remover n cantidad de timbres a una subcuenta.
+
+> [!NOTE]
+> El servicio regresa unicamente la cantidad de timbres despues de remover los timbres.
+
+**Ejemplo de consumo de la libreria para remover timbres**
+```rb
+id = "A1DFC01F-459A-4A05-BF68-1F04D1EF8860"
+timbres = 2
+comment = "Prueba Ruby"
+response = Balance::remove_stamps(id,timbres,comment)
+if (response.get_status == "success")
+    puts response.get_data
+else
+    puts response.get_message
+    puts response.get_messageDetail
+end
+```
+
+</details>
 
 ## Validación ##
 
