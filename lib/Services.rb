@@ -2,7 +2,7 @@ require 'time'
 require_relative 'Authentication/auth_request.rb'
 
 class Services
-	@token = "" 
+	@token = ""
 	@url = ""
 	@url_api = ""
 	@user = ""
@@ -30,7 +30,10 @@ class Services
 	end
 
 	def self.get_token
-		if (@token.nil? or @token.empty?) or (Time.now > @expiration_date)
+		if (@token.nil? || @token.empty?) || (Time.now > @expiration_date)
+			if @url.empty? || @user.empty? || @password.empty?
+				raise "No se puede autenticar: faltan credenciales o URL"
+			end
 			response_obj = SwAuthentication::authentication(@url, @user, @password)
 			@token = response_obj.get_token
 			@expiration_date = Time.at(response_obj.get_time_expire)
@@ -58,12 +61,11 @@ class Services
 		if (params.has_key?('user') and params['user']) and (params.has_key?('password') and params['password'])
 			@user = params['user']
 			@password = params['password']
-		else if (params.has_key?('token') and params['token'])
-				@token = params['token']
-				@expiration_date = Time.at(999_999_999)
-			else
-				Services::raise_exception("Datos de autenticación deben especificarse")
-			end
+		elsif (params.has_key?('token') and params['token'] and !params['token'].empty?)
+			@token = params['token']
+			@expiration_date = Time.at(999_999_999)
+		else
+			Services::raise_exception("Datos de autenticación deben especificarse")
 		end
 	end
 end
