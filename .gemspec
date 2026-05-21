@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name = %q{sw-sdk-ruby}
-  s.version = "0.0.15.1.pre"
+  s.version = "0.0.16.1.pre"
   s.date = %q{2023-02-02}
   s.summary = "sw-sdk-ruby"
-  s.licenses = ['GPL-3.0']
+  s.licenses = ['MIT']
   s.description = "Librería para timbrado de CFDI a través de WebService."
   s.authors     = ["Juan Gamez", "Aeyrton Villalobos","Fernando Carrillo"]
   s.email       = ['juan.gamez@sw.com.mx','dev@sw.com.mx', 'aeyrton.villalobos@sw.com.mx','fernando.carrillo@sw.com.mx']
